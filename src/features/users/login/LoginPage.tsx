@@ -1,58 +1,69 @@
-import * as React from "react";
+import TextField from "@mui/material/TextField";
+import { useForm, SubmitErrorHandler, SubmitHandler } from "react-hook-form";
 import CssBaseline from "@mui/material/CssBaseline";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Copyright } from "../signUp/signUpFeatures/Components";
-import { handleSubmit } from "./loginFeatures/Validitions";
-import { useForm } from "react-hook-form";
 import { S1 } from "./loginFeatures/Style";
-import {
-  Email,
-  Password,
-  Bottom_links,
-  TopPage,
-  Sub_button,
-} from "./loginFeatures/Components";
-const defaultTheme = createTheme();
+import { Bottom_links, TopPage, Sub_button } from "./loginFeatures/Components";
 
 export function SignIn() {
-  const [error, setError] = React.useState<string>();
-
+  type Inputs = {
+    email: string;
+    password: string;
+  };
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm({ mode: "onChange" });
-  const onSubmit = () => {};
+  } = useForm<Inputs>({ mode: "onChange" });
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box sx={S1}>
-          <TopPage />
-          <Box
-            component="form"
-            onSubmit={handleSubmit(onSubmit)}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            <Email />
-            <Password />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Bottom_links />
-            <Sub_button />
-          </Box>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box sx={S1}>
+        <TopPage />
+        <Box
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          sx={{ mt: 1 }}
+        >
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Email Address"
+            autoComplete="email"
+            autoFocus
+            {...register("email", { required: true })}
+          />
+          {errors.email && <span>This field is required</span>}
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+            {...register("password", { required: true })}
+          />
+          {errors.email && <span>This field is required</span>}
+
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          />
+          <Bottom_links />
+          <Sub_button />
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
+      </Box>
+      <Copyright sx={{ mt: 8, mb: 4 }} />
+    </Container>
   );
 }

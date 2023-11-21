@@ -1,4 +1,3 @@
-import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import ROUTES from "../../../../routes/RoutesModel";
@@ -7,34 +6,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-export function Email() {
-  return (
-    <TextField
-      margin="normal"
-      required
-      fullWidth
-      id="email"
-      label="Email Address"
-      name="email"
-      autoComplete="email"
-      autoFocus
-    />
-  );
-}
-
-export function Password() {
-  return (
-    <TextField
-      margin="normal"
-      required
-      fullWidth
-      name="password"
-      label="Password"
-      type="password"
-      id="password"
-      autoComplete="current-password"
-    />
-  );
+export function InputsFields() {
+  return <></>;
 }
 
 export function Bottom_links() {
