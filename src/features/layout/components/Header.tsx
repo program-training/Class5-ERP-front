@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Search from "../../inventory/inventory/allProductsDisplay/components/Search";
 import { useAppSelector } from "../../../redux/hooks";
-import { Typography } from "@mui/material";
 
 const Header = () => {
   const user = useAppSelector((store) => store.user.user);
@@ -15,9 +14,7 @@ const Header = () => {
         <AppBar position="static">
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <Search />
-            <Avatar>
-              <Typography>{user.username[0]}</Typography>
-            </Avatar>
+            <Avatar src="teamLogo.svg"></Avatar>
           </Toolbar>
         </AppBar>
       )}
