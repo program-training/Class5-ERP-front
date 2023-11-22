@@ -5,7 +5,7 @@ import Header from "./features/layout/components/Header";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 
-function App() {
+const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -14,6 +14,6 @@ function App() {
       </BrowserRouter>
     </Provider>
   );
-}
+};
 
 export default App;

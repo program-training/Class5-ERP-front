@@ -8,8 +8,8 @@ import {
   DialogActions,
 } from "@mui/material";
 import React from "react";
-import { useAppSelector, useAppDispatch } from "../../redux/hooks";
-import { setError } from "./errorsSlice";
+import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
+import { setError } from "../errorsSlice";
 
 const PopUP = () => {
   const { open, title, message } = useAppSelector((store) => store.error);

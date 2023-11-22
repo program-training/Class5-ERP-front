@@ -32,7 +32,7 @@ const FormAddAndUpdate = ({ setOpen, open, product, formType }: Props) => {
       component="form"
       open={open}
       onClose={() => setOpen(false)}
-      maxWidth={"lg"}
+      maxWidth={"sm"}
       onSubmit={handleSubmit(onSubmit)}
     >
       <DialogTitle
