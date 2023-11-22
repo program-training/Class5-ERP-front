@@ -1,34 +1,36 @@
 import TextField from "@mui/material/TextField";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import CssBaseline from "@mui/material/CssBaseline";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { Copyright } from "../signUp/signUpFeatures/Components";
 import { S1 } from "./signUpFeatures/Style";
-import { S2 } from "../login/loginFeatures/Style";
-import {
-  Bottom_links,
-  TopPage,
-  Sub_button,
-} from "../signUp/signUpFeatures/Components";
+import { S2 } from "../login/components/Style";
 import { ErrorMessage } from "@hookform/error-message";
 import Typography from "@mui/material/Typography";
 import {
   Password_validation,
   Email_validation,
-} from "../login/loginFeatures/Validation";
+} from "../login/components/Validation";
 import Grid from "@mui/material/Grid";
 import { SignUpInputs } from "./signUpFeatures/Validitions";
+import BottomLinks from "./components/BottomLinks";
+import SubButton from "./components/SubButton";
+import TopPage from "./components/TopPage";
+import axios from "axios";
 
-export function SignUp() {
+const SignUp = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SignUpInputs>({ mode: "onChange", criteriaMode: "all" });
-  const onSubmit = (data: SignUpInputs) => console.log(data);
+  const onSubmit = (data: SignUpInputs) => {
+    const { Password, email } = data;
+    const data1 = { username: email, password: Password };
+    axios
+      .post("http://localhost:3000/api/users/signup", data1)
+      .catch((error) => console.log(error));
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -113,18 +115,12 @@ export function SignUp() {
                 {...register("managerPassword")}
               />
             </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="keep me signed"
-              />
-            </Grid>
           </Grid>
-          <Sub_button />
-          <Bottom_links />
+          <SubButton />
+          <BottomLinks />
         </Box>
       </Box>
-      <Copyright sx={{ mt: 5 }} />
     </Container>
   );
-}
+};
+export default SignUp;

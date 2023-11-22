@@ -1,22 +1,18 @@
 import TextField from "@mui/material/TextField";
-import { useForm, SubmitHandler } from "react-hook-form";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import { useForm } from "react-hook-form";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { Copyright } from "../signUp/signUpFeatures/Components";
-import { S1, S2 } from "./loginFeatures/Style";
-import { Bottom_links, TopPage, Sub_button } from "./loginFeatures/Components";
-import { inputs } from "./loginFeatures/Validation";
+import { S1, S2 } from "./components/Style";
+import { inputs } from "./components/Validation";
 import { ErrorMessage } from "@hookform/error-message";
 import Typography from "@mui/material/Typography";
-import {
-  Password_validation,
-  Email_validation,
-} from "./loginFeatures/Validation";
+import { Password_validation, Email_validation } from "./components/Validation";
 import { Grid } from "@mui/material";
+import BottomLinks from "./components/BottomLinks";
+import { SubButton } from "./components/SubButton";
+import { TopPage } from "./components/TopPage";
 
-export function SignIn() {
+const LogIn = () => {
   const {
     register,
     handleSubmit,
@@ -84,15 +80,12 @@ export function SignIn() {
             />
           </Grid>
 
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Bottom_links />
-          <Sub_button />
+          <BottomLinks />
+          <SubButton />
         </Box>
       </Box>
-      <Copyright sx={{ mt: 8, mb: 4 }} />
     </Container>
   );
-}
+};
+
+export default LogIn;
