@@ -1,6 +1,6 @@
 import { TableBody } from "@mui/material";
-import { StyledTableCell } from "../styles/styleLableCell";
-import { StyledTableRow } from "../styles/styleLableRow";
+import { StyledTableCell } from "../styles/styleLabelCell";
+import { StyledTableRow } from "../styles/styleLabelRow";
 import { Dispatch, SetStateAction } from "react";
 import { adminProductInterface } from "../../../interfaces/adminProductInterface";
 
