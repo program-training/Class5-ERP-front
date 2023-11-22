@@ -45,10 +45,12 @@ const ProductDetails = ({ openDetails, setOpenDetails, product }: Props) => {
         </Box>
       </Dialog>
       <FormAddAndUpdate
-        formType="update"
-        open={openUpdate}
-        setOpen={setOpenUpdate}
-        product={product}
+        Props={{
+          formType: "update",
+          open: openUpdate,
+          setOpen: setOpenUpdate,
+          product: product,
+        }}
       />
     </>
   );
