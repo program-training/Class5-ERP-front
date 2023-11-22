@@ -18,7 +18,7 @@ const Search = ({ allProducts, setFilteredProducts }: Props) => {
     setFilteredProducts(allProducts);
     const helper: adminProductInterface[] = [];
     allProducts.forEach((product) => {
-      const regex = new RegExp(`${value}`);
+      const regex = new RegExp(`${value}`, `i`);
       regex.test(product.name)
         ? helper.push(product)
         : regex.test(product.category) && helper.push(product);
