@@ -11,14 +11,14 @@ interface Props {
   setFilteredProducts: Dispatch<React.SetStateAction<adminProductInterface[]>>;
 }
 
-const Seerch = ({ allProducts, setFilteredProducts }: Props) => {
+const Search = ({ allProducts, setFilteredProducts }: Props) => {
   const [value, setValue] = useState<SetStateAction<string>>();
 
   const handlerClick = () => {
     setFilteredProducts(allProducts);
     const helper: adminProductInterface[] = [];
     allProducts.forEach((product) => {
-      const regex = new RegExp(`${value}`);
+      const regex = new RegExp(`${value}`, `i`);
       regex.test(product.name)
         ? helper.push(product)
         : regex.test(product.category) && helper.push(product);
@@ -44,4 +44,4 @@ const Seerch = ({ allProducts, setFilteredProducts }: Props) => {
     </Paper>
   );
 };
-export default Seerch;
+export default Search;
