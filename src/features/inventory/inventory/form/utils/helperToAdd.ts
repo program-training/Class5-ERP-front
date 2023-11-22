@@ -1,14 +1,14 @@
-export const helperToAdd = {
-  id: "",
-  name: "",
-  salePrice: 0,
-  quantity: 0,
-  description: "",
-  category: "",
-  discountPercentage: 0,
-  imageUrl: "",
-  imageAlt: "",
-  isForSale: false,
-  costPrice: 0,
-  supplier: "",
-};
+// export const helperToAdd = {
+//   id: undefined,
+//   name: undefined,
+//   salePrice: undefined,
+//   quantity: undefined,
+//   description: undefined,
+//   category: undefined,
+//   discountPercentage: undefined,
+//   imageUrl: undefined,
+//   imageAlt: undefined,
+//   isForSale: true,
+//   costPrice: undefined,
+//   supplier: undefined,
+// };

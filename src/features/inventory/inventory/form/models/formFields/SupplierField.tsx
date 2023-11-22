@@ -5,7 +5,7 @@ import { adminProductInterface } from "../../../../interfaces/adminProductInterf
 interface Props {
   register: UseFormRegister<adminProductInterface>;
   error: string | undefined;
-  defaultValue: string | number;
+  defaultValue: string | number | undefined;
 }
 
 const SupplierField = ({ register, error, defaultValue }: Props) => {
@@ -17,6 +17,10 @@ const SupplierField = ({ register, error, defaultValue }: Props) => {
       label="supplier"
       {...register("supplier", {
         required: "supplier is required",
+        minLength: {
+          value: 2,
+          message: "Must be at least two characters",
+        },
         pattern: {
           value: /^[a-zA-Z\s-.&]+$/,
           message:

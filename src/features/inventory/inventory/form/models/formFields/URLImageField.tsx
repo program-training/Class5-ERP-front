@@ -5,7 +5,7 @@ import { adminProductInterface } from "../../../../interfaces/adminProductInterf
 interface Props {
   register: UseFormRegister<adminProductInterface>;
   error: string | undefined;
-  defaultValue: string | number;
+  defaultValue: string | number | undefined;
 }
 
 const URLImageField = ({ register, error, defaultValue }: Props) => {
@@ -18,9 +18,9 @@ const URLImageField = ({ register, error, defaultValue }: Props) => {
       {...register("imageUrl", {
         required: "url is required",
         pattern: {
-          value: /^\S*$/,
+          value: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/,
           message:
-            "Only uppercase letters, lowercase letters and spaces should be entered",
+            "Invalid URL",
         },
       })}
       error={!!error}
