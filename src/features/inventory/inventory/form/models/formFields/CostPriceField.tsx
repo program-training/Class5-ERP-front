@@ -5,7 +5,7 @@ import { adminProductInterface } from "../../../../interfaces/adminProductInterf
 interface Props {
   register: UseFormRegister<adminProductInterface>;
   error: string | undefined;
-  defaultValue: string | number;
+  defaultValue: string | number| undefined
 }
 
 const CostPriceField = ({ register, error, defaultValue }: Props) => {
@@ -18,6 +18,10 @@ const CostPriceField = ({ register, error, defaultValue }: Props) => {
       label="cost price"
       {...register("costPrice", {
         required: "cost price is required",
+        pattern: {
+          value: /^\d+(\.\d+)?$/,
+          message: "Must be a positive number"
+        }
       })}
       error={!!error}
       helperText={error}

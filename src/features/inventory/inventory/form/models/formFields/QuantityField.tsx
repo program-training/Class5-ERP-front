@@ -5,7 +5,7 @@ import { adminProductInterface } from "../../../../interfaces/adminProductInterf
 interface Props {
   register: UseFormRegister<adminProductInterface>;
   error: string | undefined;
-  defaultValue: string | number;
+  defaultValue: string | number | undefined;
 }
 
 const QuantityField = ({ register, error, defaultValue }: Props) => {
@@ -18,6 +18,10 @@ const QuantityField = ({ register, error, defaultValue }: Props) => {
       label="quantity"
       {...register("quantity", {
         required: "quantity is required",
+        pattern: {
+          value: /^\d+(\.\d+)?$/,
+          message: "Must be a positive number",
+        },
       })}
       error={!!error}
       helperText={error}

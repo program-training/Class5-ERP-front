@@ -5,7 +5,7 @@ import { adminProductInterface } from "../../../../interfaces/adminProductInterf
 interface Props {
   register: UseFormRegister<adminProductInterface>;
   error: string | undefined;
-  defaultValue: string | number;
+  defaultValue: string | number| undefined
 }
 
 const DescriptionField = ({ register, error, defaultValue }: Props) => {
@@ -17,6 +17,15 @@ const DescriptionField = ({ register, error, defaultValue }: Props) => {
       label="description"
       {...register("description", {
         required: "description is required",
+        minLength: {
+          value: 2,
+          message: "Must be at least two characters",
+        },
+        pattern: {
+          value: /^[a-zA-Z\s-]+$/,
+          message:
+            "Only uppercase letters, lowercase letters and numbers, and spaces should be entered",
+        },
       })}
       error={!!error}
       helperText={error}

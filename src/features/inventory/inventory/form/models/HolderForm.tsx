@@ -12,66 +12,75 @@ import CostPriceField from "./formFields/CostPriceField";
 import URLImageField from "./formFields/URLImageField";
 import AltImageField from "./formFields/AltImageField";
 import IsForSaleField from "./formFields/IsForSaleField";
+import { FC } from "react";
 
 interface Props {
-  product: adminProductInterface;
+  product?: adminProductInterface;
   errors: FieldErrors<adminProductInterface>;
   register: UseFormRegister<adminProductInterface>;
 }
+type dinamicProps = {
+  Props: Props;
+};
 
-const HolderForm = ({ product, errors, register }: Props) => {
+const HolderForm: FC<dinamicProps> = ({ Props }) => {
+  const { product, errors, register } = Props;
+
   return (
     <DialogContent>
       <CategoryField
         register={register}
         error={errors.category?.message}
-        defaultValue={product.category}
+        defaultValue={product ? product.category : product}
       />
       <NameField
         register={register}
         error={errors.name?.message}
-        defaultValue={product.name}
+        defaultValue={product ? product.name : product}
       />
       <DescriptionField
         register={register}
         error={errors.description?.message}
-        defaultValue={product.description}
+        defaultValue={product ? product.description : product}
       />
       <SupplierField
         register={register}
         error={errors.supplier?.message}
-        defaultValue={product.supplier}
+        defaultValue={product ? product.supplier : product}
       />
       <QuantityField
         register={register}
         error={errors.quantity?.message}
-        defaultValue={product.quantity}
+        defaultValue={product ? product.quantity : product}
       />
-      <IsForSaleField register={register} defaultValue={product.isForSale} />
+      <IsForSaleField
+        register={register}
+        defaultValue={product ? product.isForSale : true}
+      />
       <CostPriceField
         register={register}
         error={errors.costPrice?.message}
-        defaultValue={product.costPrice}
+        defaultValue={product ? product.costPrice : product}
       />
       <SalePriceField
         register={register}
         error={errors.salePrice?.message}
-        defaultValue={product.salePrice}
+        defaultValue={product ? product.salePrice : product}
       />
       <DiscountPercentageField
         register={register}
         error={errors.discountPercentage?.message}
-        defaultValue={product.discountPercentage}
+        defaultValue={product ? product.discountPercentage : product}
       />
       <URLImageField
         register={register}
         error={errors.imageUrl?.message}
-        defaultValue={product.imageUrl}
+        defaultValue={product ? product.imageUrl : product}
       />
       <AltImageField
         register={register}
         error={errors.imageAlt?.message}
-        defaultValue={product.imageAlt}
+        defaultValue={product ? product.imageAlt : product}
       />
     </DialogContent>
   );

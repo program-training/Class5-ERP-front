@@ -3,17 +3,20 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { adminProductInterface } from "../../../interfaces/adminProductInterface";
 import { useForm } from "react-hook-form";
 import HolderForm from "../models/HolderForm";
-import { Dispatch } from "react";
+import { Dispatch, FC } from "react";
 import Buttons from "../models/Buttons";
 
 interface Props {
   open: boolean;
   setOpen: Dispatch<React.SetStateAction<boolean>>;
-  product: adminProductInterface;
+  product?: adminProductInterface;
   formType: "addition" | "update";
 }
-
-const FormAddAndUpdate = ({ setOpen, open, product, formType }: Props) => {
+type prop = {
+  Props: Props;
+};
+const FormAddAndUpdate: FC<prop> = ({ Props }) => {
+  const { setOpen, open, product, formType } = Props;
   const {
     register,
     handleSubmit,
@@ -40,7 +43,14 @@ const FormAddAndUpdate = ({ setOpen, open, product, formType }: Props) => {
         variant="h4"
         sx={{ display: "flex", justifyContent: "center" }}
       >{`product ${formType} form`}</DialogTitle>
-      <HolderForm errors={errors} register={register} product={product} />
+      {formType === "addition" ? (
+        <HolderForm Props={{ errors: errors, register: register }} />
+      ) : (
+        <HolderForm
+          Props={{ errors: errors, register: register, product: product }}
+        />
+      )}
+
       <Buttons isValid={isValid} setOpen={setOpen} formType={formType} />
     </Dialog>
   );
