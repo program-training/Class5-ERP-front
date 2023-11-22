@@ -7,7 +7,8 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import React from "react";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { setError } from "./errorsSlice";
 
 const PopUP = () => {
