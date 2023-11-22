@@ -2,24 +2,27 @@ import { TableBody } from "@mui/material";
 import { StyledTableCell } from "../styles/styleLabelCell";
 import { StyledTableRow } from "../styles/styleLabelRow";
 import { Dispatch, SetStateAction } from "react";
-import { adminProductInterface } from "../../../interfaces/adminProductInterface";
+import { useAppDispatch, useAppSelector } from "../../../../../redux/hooks";
+import { setChosenProduct } from "../../../inventorySlice";
 
 interface Props {
-  products: adminProductInterface[];
   setOpenDetails: Dispatch<SetStateAction<boolean>>;
-  setProduct: Dispatch<SetStateAction<adminProductInterface | undefined>>;
 }
 
-const TableBodyModel = ({ products, setOpenDetails, setProduct }: Props) => {
+const TableBodyModel = ({ setOpenDetails }: Props) => {
+  const dispatch = useAppDispatch();
+  const filteredProducts = useAppSelector(
+    (store) => store.inventory.inventoryProducts.filteredProducts
+  );
   return (
     <TableBody>
-      {products.map((product, key) => (
+      {filteredProducts.map((product, key) => (
         <StyledTableRow key={key}>
           <StyledTableCell
             sx={{ padding: "0px", margin: "0px" }}
             onClick={() => {
               setOpenDetails(true);
-              setProduct(product);
+              dispatch(setChosenProduct(product));
             }}
             align="center"
           >
@@ -28,7 +31,7 @@ const TableBodyModel = ({ products, setOpenDetails, setProduct }: Props) => {
           <StyledTableCell
             onClick={() => {
               setOpenDetails(true);
-              setProduct(product);
+              dispatch(setChosenProduct(product));
             }}
             align="center"
           >
@@ -37,7 +40,7 @@ const TableBodyModel = ({ products, setOpenDetails, setProduct }: Props) => {
           <StyledTableCell
             onClick={() => {
               setOpenDetails(true);
-              setProduct(product);
+              dispatch(setChosenProduct(product));
             }}
             align="center"
           >
@@ -46,7 +49,7 @@ const TableBodyModel = ({ products, setOpenDetails, setProduct }: Props) => {
           <StyledTableCell
             onClick={() => {
               setOpenDetails(true);
-              setProduct(product);
+              dispatch(setChosenProduct(product));
             }}
             align="center"
           >

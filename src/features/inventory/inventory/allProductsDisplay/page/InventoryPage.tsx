@@ -3,10 +3,10 @@ import TableTitle from "../components/TableTitle";
 import ProductTable from "../components/ProductTable";
 import OverallInventoryTable from "../components/OverallInventoryTable";
 import AddProduct from "../components/AddProduct";
-import Search from "../components/Search";
-import { aproducts } from "../styles/aaa";
-import { adminProductInterface } from "../../../interfaces/adminProductInterface";
-import { useState, useEffect } from "react";
+import { useAppDispatch } from "../../../../../redux/hooks";
+import axios from "axios";
+import { useEffect } from "react";
+import { setAllProducts, setFilteredProducts } from "../../../inventorySlice";
 
 const styleBoxTable = {
   margin: "10px",
@@ -17,33 +17,26 @@ const styleBoxTable = {
 };
 
 const InventoryPage = () => {
-  const [allProducts, setAllProducts] = useState<adminProductInterface[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<
-    adminProductInterface[]
-  >([]);
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    setAllProducts(aproducts);
-    setFilteredProducts(aproducts);
-  }, []);
+    axios.get("http://localhost:3000/api/inventory").then((res) => {
+      dispatch(setAllProducts(res.data));
+      dispatch(setFilteredProducts(res.data));
+    });
+  }, [dispatch]);
 
   return (
-    <>
-      <Box>
-        <AddProduct />
-        <Search
-          allProducts={allProducts}
-          setFilteredProducts={setFilteredProducts}
-        />
-        <Box sx={styleBoxTable}>
-          <TableTitle title="overall invertory" />
-          <OverallInventoryTable />
-        </Box>
-        <Box sx={styleBoxTable}>
-          <TableTitle title="products" />
-          <ProductTable products={filteredProducts} />
-        </Box>
+    <Box>
+      <AddProduct />
+      <Box sx={styleBoxTable}>
+        <TableTitle title="Overall inventory" />
+        <OverallInventoryTable />
       </Box>
-    </>
+      <Box sx={styleBoxTable}>
+        <TableTitle title="Products" />
+        <ProductTable />
+      </Box>
+    </Box>
   );
 };
 export default InventoryPage;

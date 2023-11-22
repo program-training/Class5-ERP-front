@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 
 interface Props {
-  title: "overall invertory" | "products";
+  title: "Overall inventory" | "Products";
 }
 
 const TableTitle = ({ title }: Props) => {

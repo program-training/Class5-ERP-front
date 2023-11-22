@@ -1,24 +1,27 @@
 import Dialog from "@mui/material/Dialog";
-import { adminProductInterface } from "../../../interfaces/adminProductInterface";
 import { Box } from "@mui/material";
 import { useState } from "react";
 import FormAddAndUpdate from "../../form/components/FormAddAndUpdate";
 import AppBarModel from "../models/AppBar";
 import Details from "../models/Details";
+import { useAppSelector } from "../../../../../redux/hooks";
 
 interface Props {
   openDetails: boolean;
   setOpenDetails: React.Dispatch<React.SetStateAction<boolean>>;
-  product: adminProductInterface;
 }
 
-const ProductDetails = ({ openDetails, setOpenDetails, product }: Props) => {
+const ProductDetails = ({ openDetails, setOpenDetails }: Props) => {
+  const product = useAppSelector(
+    (store) => store.inventory.inventoryProducts.chosenProduct
+  );
   const handleClose = () => {
     setOpenDetails(false);
   };
   const [openUpdate, setOpenUpdate] = useState(false);
+  if (!product) return;
   return (
-    <>
+    <Box>
       <Dialog
         scroll={"paper"}
         fullScreen
@@ -50,7 +53,7 @@ const ProductDetails = ({ openDetails, setOpenDetails, product }: Props) => {
         setOpen={setOpenUpdate}
         product={product}
       />
-    </>
+    </Box>
   );
 };
 

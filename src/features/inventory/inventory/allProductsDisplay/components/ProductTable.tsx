@@ -3,34 +3,25 @@ import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import ProductDetails from "../../specificProduct/components/ProductDetails";
 import { useState } from "react";
-import { adminProductInterface } from "../../../interfaces/adminProductInterface";
 import TableHeadModel from "../models/TableHead";
 import TableBodyModel from "../models/TableBody";
+import { useAppSelector } from "../../../../../redux/hooks";
 
-interface Props {
-  products: adminProductInterface[];
-}
-
-const ProductTable = ({ products }: Props) => {
+const ProductTable = () => {
   const [openDetails, setOpenDetails] = useState(false);
-  const [product, setProduct] = useState<adminProductInterface>();
+  const products = useAppSelector((store) => store.inventory.inventoryProducts);
   return (
     <>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }}>
           <TableHeadModel viewImage={true} />
-          <TableBodyModel
-            products={products}
-            setOpenDetails={setOpenDetails}
-            setProduct={setProduct}
-          />
+          <TableBodyModel setOpenDetails={setOpenDetails} />
         </Table>
       </TableContainer>
-      {product && (
+      {products.chosenProduct && (
         <ProductDetails
           openDetails={openDetails}
           setOpenDetails={setOpenDetails}
-          product={product}
         />
       )}
     </>

@@ -8,11 +8,8 @@ const Header = () => {
   return (
     <Box>
       <AppBar position="static">
-        <Toolbar>
-          <Search
-            allProducts={allProducts}
-            setFilteredProducts={setFilteredProducts}
-          />
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Search />
           <Avatar />
         </Toolbar>
       </AppBar>

@@ -3,27 +3,30 @@ import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/ImageSearch";
-import { Dispatch, SetStateAction, useState } from "react";
+import { SetStateAction, useState } from "react";
 import { adminProductInterface } from "../../../interfaces/adminProductInterface";
+import { useAppDispatch, useAppSelector } from "../../../../../redux/hooks";
+import { setFilteredProducts } from "../../../inventorySlice";
 
-interface Props {
-  allProducts: adminProductInterface[];
-  setFilteredProducts: Dispatch<React.SetStateAction<adminProductInterface[]>>;
-}
-
-const Search = ({ allProducts, setFilteredProducts }: Props) => {
+const Search = () => {
   const [value, setValue] = useState<SetStateAction<string>>();
-
+  const allProducts = useAppSelector(
+    (store) => store.inventory.inventoryProducts.allProducts
+  );
+  const dispatch = useAppDispatch();
   const handlerClick = () => {
-    setFilteredProducts(allProducts);
+    dispatch(setFilteredProducts(allProducts));
+
     const helper: adminProductInterface[] = [];
+
     allProducts.forEach((product) => {
       const regex = new RegExp(`${value}`, `i`);
+
       regex.test(product.name)
         ? helper.push(product)
         : regex.test(product.category) && helper.push(product);
     });
-    setFilteredProducts(helper);
+    dispatch(setFilteredProducts(helper));
   };
 
   return (
