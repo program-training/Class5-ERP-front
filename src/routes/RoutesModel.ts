@@ -1,9 +1,8 @@
 const ROUTES = {
-  login_page: "/login_page",
-  sign_up: "/sign_up",
-  HOME: "/home",
-  ERROR: "/error",
-  inventory: "/inventory",
+  HOME: "/",
+  login_page: "/login",
+  sign_up: "/signup",
+  ERROR: "/404",
 };
 
 export default ROUTES;

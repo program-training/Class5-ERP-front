@@ -7,9 +7,8 @@ import InventoryPage from "../features/inventory/inventory/allProductsDisplay/pa
 const Router = () => {
   return (
     <Routes>
-      <Route path="/" element={<SignUp />} />
+      <Route path={ROUTES.HOME} element={<InventoryPage />} />
       <Route path={ROUTES.login_page} element={<SignIn />} />
-      <Route path={ROUTES.inventory} element={<InventoryPage />} />
       <Route path={ROUTES.sign_up} element={<SignUp />} />
       <Route path={ROUTES.ERROR} element={""} />
     </Routes>
