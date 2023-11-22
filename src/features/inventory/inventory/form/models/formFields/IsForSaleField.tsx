@@ -14,7 +14,7 @@ const styleRadoi = {
   alignItems: "center",
 };
 
-const IsForSaleField = ({ register, defaultValue }: Props) => {
+const IsForSaleField = ({ defaultValue, register }: Props) => {
   const [selectedValue, setSelectedValue] = useState<boolean>(defaultValue);
 
   return (

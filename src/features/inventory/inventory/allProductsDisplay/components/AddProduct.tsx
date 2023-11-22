@@ -1,6 +1,5 @@
 import { useState } from "react";
 import FormAddAndUpdate from "../../form/components/FormAddAndUpdate";
-import { helperToAdd } from "../../form/utils/helperToAdd";
 import { Button } from "@mui/material";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 
@@ -17,10 +16,7 @@ const AddProduct = () => {
         add product
       </Button>
       <FormAddAndUpdate
-        formType="addition"
-        open={openAdd}
-        setOpen={setOpenAdd}
-        product={helperToAdd}
+        Props={{ formType: "addition", open: openAdd, setOpen: setOpenAdd }}
       />
     </>
   );
