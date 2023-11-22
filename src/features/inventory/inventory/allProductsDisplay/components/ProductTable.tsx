@@ -18,7 +18,7 @@ const ProductTable = ({ products }: Props) => {
     <>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }}>
-          <TableHeadModel viweImage={true} />
+          <TableHeadModel viewImage={true} />
           <TableBodyModel
             products={products}
             setOpenDetails={setOpenDetails}

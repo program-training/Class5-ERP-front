@@ -11,7 +11,7 @@ interface Props {
   setFilteredProducts: Dispatch<React.SetStateAction<adminProductInterface[]>>;
 }
 
-const Seerch = ({ allProducts, setFilteredProducts }: Props) => {
+const Search = ({ allProducts, setFilteredProducts }: Props) => {
   const [value, setValue] = useState<SetStateAction<string>>();
 
   const handlerClick = () => {
@@ -44,4 +44,4 @@ const Seerch = ({ allProducts, setFilteredProducts }: Props) => {
     </Paper>
   );
 };
-export default Seerch;
+export default Search;

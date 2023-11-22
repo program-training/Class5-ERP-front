@@ -3,8 +3,8 @@ import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import TableHeadModel from "../models/TableHead";
 import { TableBody } from "@mui/material";
-import { StyledTableCell } from "../styles/styleLableCell";
-import { StyledTableRow } from "../styles/styleLableRow";
+import { StyledTableCell } from "../styles/styleLabelCell";
+import { StyledTableRow } from "../styles/styleLabelRow";
 
 const a = [1, 2, 3];
 
@@ -13,7 +13,7 @@ const OverallInventoryTable = () => {
     <>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }}>
-          <TableHeadModel viweImage={false} />
+          <TableHeadModel viewImage={false} />
           <TableBody>
             <StyledTableRow>
               {a.map((value, key) => (
