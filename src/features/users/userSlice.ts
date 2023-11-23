@@ -6,7 +6,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  user: null,
+  user: localStorage.getItem("TOKEN") || null,
 };
 
 export const userSlice = createSlice({
@@ -17,14 +17,8 @@ export const userSlice = createSlice({
       state.user = action.payload;
       return state;
     },
-    getUser: (state) => {
-      const token = localStorage.getItem("TOKEN");
-      if (token !== null && token !== "undefined") state.user = "exist";
-      else state.user = null;
-      return state;
-    },
   },
 });
 
-export const { setUser, getUser } = userSlice.actions;
+export const { setUser } = userSlice.actions;
 export default userSlice.reducer;

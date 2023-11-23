@@ -7,7 +7,6 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
-import React from "react";
 import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
 import { setError } from "../errorsSlice";
 
