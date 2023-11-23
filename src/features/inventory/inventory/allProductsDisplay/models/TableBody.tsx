@@ -16,7 +16,7 @@ const TableBodyModel = ({ setOpenDetails }: Props) => {
   );
   return (
     <TableBody>
-      {filteredProducts.map((product, key) => (
+      {filteredProducts?.map((product, key) => (
         <StyledTableRow key={key}>
           <StyledTableCell
             sx={{ padding: "0px", margin: "0px" }}
