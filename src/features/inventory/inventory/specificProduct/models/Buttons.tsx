@@ -18,6 +18,7 @@ const Buttons = ({ setOpenUpdate, handleClose }: Props) => {
     (store) => store.inventory.inventoryProducts
   );
   const dispatch = useAppDispatch();
+  const token = localStorage.getItem("TOKEN");
   return (
     <Stack direction="row" spacing={2}>
       <Button
@@ -31,8 +32,17 @@ const Buttons = ({ setOpenUpdate, handleClose }: Props) => {
         variant="contained"
         endIcon={<DeleteSweepIcon />}
         onClick={() => {
+          console.log(chosenProduct?.id);
+
           axios
-            .delete(`http://localhost:3000/api/inventory/${chosenProduct?.id}`)
+            .delete(
+              `http://localhost:3000/api/inventory/${chosenProduct?.id}`,
+              {
+                headers: {
+                  authorization: token,
+                },
+              }
+            )
             .then(() => {
               const helper = [...allProducts];
               helper.splice(

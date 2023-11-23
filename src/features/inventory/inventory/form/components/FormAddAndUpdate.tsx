@@ -20,8 +20,8 @@ type prop = {
   Props: Props;
 };
 const FormAddAndUpdate: FC<prop> = ({ Props }) => {
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluQGNsYXNzLmNvbSIsInBhc3N3b3JkIjoiJDJhJDEwJG5VeDA4bjN4bVpsRDIvYjRIcFIxRS5ZSXhvdFdsb2RROGtPOFE4d0FlUGtEWi84WXpOU2VPIiwiaWF0IjoxNzAwNjU3NDc2fQ.zzFsvvzPdhLps3cHkIvtDhEA4PiVprfp5pFuUYwmUNA";
+  const token = localStorage.getItem("TOKEN");
+
   const helperButton = useHelperButtons();
   const dispatch = useAppDispatch();
   const { chosenProduct } = useAppSelector(

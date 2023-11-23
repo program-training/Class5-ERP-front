@@ -18,12 +18,14 @@ const styleBoxTable = {
   justifyContent: "space-around",
   alignItems: "center",
 };
-
 const InventoryPage = () => {
   const navigate = useNavigate();
   const navigateTo = (to: To) => navigate(to);
   const dispatch = useAppDispatch();
   const { open } = useAppSelector((store) => store.error);
+  // const { chosenProduct } = useAppSelector(
+  //   (store) => store.inventory.inventoryProducts
+  // );
 
   const user = useAppSelector((store) => store.user.user);
 
