@@ -15,6 +15,7 @@ const LogOutMenu = ({ anchorEl, setAnchorEl, userName }: Props) => {
     localStorage.removeItem("TOKEN");
     localStorage.removeItem("username");
     dispatch(setUser(null));
+    setAnchorEl(null);
   };
   const handleClose = () => {
     setAnchorEl(null);
