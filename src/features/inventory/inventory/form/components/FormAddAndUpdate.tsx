@@ -5,7 +5,11 @@ import { useForm } from "react-hook-form";
 import HolderForm from "../models/HolderForm";
 import { Dispatch, FC } from "react";
 import Buttons from "../models/Buttons";
-
+import axios from "axios";
+import { setError } from "../../../../general/errorsSlice";
+// import PopUP from "../../../../general/PopUp";
+import { useAppDispatch, useAppSelector } from "../../../../../redux/hooks";
+import useHelperButtons from "../../../useHelperButtons";
 interface Props {
   open: boolean;
   setOpen: Dispatch<React.SetStateAction<boolean>>;
@@ -16,6 +20,13 @@ type prop = {
   Props: Props;
 };
 const FormAddAndUpdate: FC<prop> = ({ Props }) => {
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluQGNsYXNzLmNvbSIsInBhc3N3b3JkIjoiJDJhJDEwJG5VeDA4bjN4bVpsRDIvYjRIcFIxRS5ZSXhvdFdsb2RROGtPOFE4d0FlUGtEWi84WXpOU2VPIiwiaWF0IjoxNzAwNjU3NDc2fQ.zzFsvvzPdhLps3cHkIvtDhEA4PiVprfp5pFuUYwmUNA";
+  const helperButton = useHelperButtons();
+  const dispatch = useAppDispatch();
+  const { chosenProduct } = useAppSelector(
+    (store) => store.inventory.inventoryProducts
+  );
   const { setOpen, open, product, formType } = Props;
   const {
     register,
@@ -26,8 +37,49 @@ const FormAddAndUpdate: FC<prop> = ({ Props }) => {
     shouldUnregister: true,
   });
 
-  const onSubmit = (data: adminProductInterface) => {
-    console.log(data);
+  const onSubmit = (newProduct: adminProductInterface) => {
+    if (newProduct.isForSale === "true") newProduct.isForSale = true;
+    if (newProduct.isForSale === "false") newProduct.isForSale = false;
+    if (formType === "addition") {
+      axios
+        .post("http://localhost:3000/api/inventory", newProduct, {
+          headers: {
+            authorization: token,
+          },
+        })
+        .then(() => {
+          helperButton(newProduct, "add");
+        })
+        .catch((error) => {
+          dispatch(
+            setError({ open: true, message: error.message, title: "ERROR" })
+          );
+          console.log(error);
+        });
+    }
+    if (formType === "update") {
+      console.log(chosenProduct);
+
+      axios
+        .put(
+          `http://localhost:3000/api/inventory/${chosenProduct?.id}`,
+          newProduct,
+          {
+            headers: {
+              authorization: token,
+            },
+          }
+        )
+        .then(() => {
+          helperButton(newProduct, "update");
+        })
+        .catch((error) => {
+          dispatch(
+            setError({ open: true, message: error.message, title: "ERROR" })
+          );
+          console.log(error);
+        });
+    }
   };
 
   return (
@@ -50,7 +102,6 @@ const FormAddAndUpdate: FC<prop> = ({ Props }) => {
           Props={{ errors: errors, register: register, product: product }}
         />
       )}
-
       <Buttons isValid={isValid} setOpen={setOpen} formType={formType} />
     </Dialog>
   );

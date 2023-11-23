@@ -22,7 +22,7 @@ const CategoryField = ({ register, error, defaultValue }: Props) => {
           message: "Must be at least two characters",
         },
         pattern: {
-          value: /^[a-zA-Z\s-]+$/,
+          value: /^[A-Za-z0-9]*$/,
           message:
             "Only uppercase letters, lowercase letters and numbers, and spaces should be entered",
         },
