@@ -3,32 +3,32 @@ import { useForm } from "react-hook-form";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { S1 } from "./signUpFeatures/Style";
-import { S2 } from "../login/components/Style";
-import { ErrorMessage } from "@hookform/error-message";
-import Typography from "@mui/material/Typography";
+import { S1 } from "./components/Style";
 import {
   Password_validation,
   Email_validation,
 } from "../login/components/Validation";
 import Grid from "@mui/material/Grid";
-import { SignUpInputs } from "./signUpFeatures/Validitions";
+import { SignUpInputs } from "./components/Validitions";
 import BottomLinks from "./components/BottomLinks";
 import SubButton from "./components/SubButton";
 import TopPage from "./components/TopPage";
-import axios from "axios";
+import signUpReq from "./service/signUpReq";
+import { To, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<SignUpInputs>({ mode: "onChange", criteriaMode: "all" });
+  const navigate = useNavigate();
+  const navigateTo = (to: To) => navigate(to);
   const onSubmit = (data: SignUpInputs) => {
-    const { Password, email } = data;
-    const data1 = { username: email, password: Password };
-    axios
-      .post("http://localhost:3000/api/users/signup", data1)
+    const { password, email } = data;
+    const userToSend = { email, password };
+    signUpReq(userToSend)
+      .then(() => navigateTo("/"))
       .catch((error) => console.log(error));
   };
   return (
@@ -43,71 +43,31 @@ const SignUp = () => {
           sx={{ mt: 3 }}
         >
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="given-name"
-                required
-                fullWidth
-                label="First Name"
-                autoFocus
-                {...register("firstName")}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                fullWidth
-                label="Last Name"
-                autoComplete="family-name"
-                {...register("lastName")}
-              />
-            </Grid>
             <Grid item xs={12}>
               <TextField
                 required
                 fullWidth
+                helperText={errors.email?.message}
+                error={errors.email ? true : false}
                 label="Email Address"
                 autoComplete="email"
                 {...register("email", Email_validation)}
               />
-              <ErrorMessage
-                errors={errors}
-                name="email"
-                render={({ messages }) =>
-                  messages &&
-                  Object.entries(messages).map(([type, message]) => (
-                    <Typography sx={S2} key={type}>
-                      {message}
-                    </Typography>
-                  ))
-                }
-              />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 required
                 fullWidth
-                label="Password"
+                helperText={errors.password?.message}
+                error={errors.password ? true : false}
+                label="password"
                 type="password"
                 autoComplete="new-password"
-                {...register("Password", Password_validation)}
-              />
-              <ErrorMessage
-                errors={errors}
-                name="Password"
-                render={({ messages }) =>
-                  messages &&
-                  Object.entries(messages).map(([type, message]) => (
-                    <Typography key={type} sx={S2}>
-                      {message}
-                    </Typography>
-                  ))
-                }
+                {...register("password", Password_validation)}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                required
                 fullWidth
                 label="manager-password"
                 type="password"
@@ -116,7 +76,7 @@ const SignUp = () => {
               />
             </Grid>
           </Grid>
-          <SubButton />
+          <SubButton isValid={isValid} />
           <BottomLinks />
         </Box>
       </Box>

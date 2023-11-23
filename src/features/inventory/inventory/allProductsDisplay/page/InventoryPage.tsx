@@ -4,11 +4,12 @@ import ProductTable from "../components/ProductTable";
 import OverallInventoryTable from "../components/OverallInventoryTable";
 import AddProduct from "../components/AddProduct";
 import { useAppDispatch, useAppSelector } from "../../../../../redux/hooks";
-import axios from "axios";
 import { useEffect } from "react";
 import { setAllProducts, setFilteredProducts } from "../../../inventorySlice";
 import { To, useNavigate } from "react-router-dom";
 import ROUTES from "../../../../../routes/RoutesModel";
+import { getUser } from "../../../../users/userSlice";
+import getProductFromServer from "../service/getProducts";
 
 const styleBoxTable = {
   margin: "10px",
@@ -19,19 +20,20 @@ const styleBoxTable = {
 };
 
 const InventoryPage = () => {
-  const user = useAppSelector((store) => store.user.user);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  dispatch(getUser());
+  const user = useAppSelector((store) => store.user.user);
 
   useEffect(() => {
     const navigateTo = (to: To) => navigate(to);
-    if (!user) navigateTo(ROUTES.login_page);
+    if (user === null) navigateTo(ROUTES.login_page);
 
-    axios.get("http://localhost:3000/api/inventory").then((res) => {
-      dispatch(setAllProducts(res.data));
-      dispatch(setFilteredProducts(res.data));
+    getProductFromServer().then((res) => {
+      dispatch(setAllProducts(res));
+      dispatch(setFilteredProducts(res));
     });
-  }, [dispatch, navigate, user]);
+  }, [user]);
 
   return (
     <Box>

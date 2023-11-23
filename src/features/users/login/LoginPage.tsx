@@ -11,14 +11,30 @@ import { Grid } from "@mui/material";
 import BottomLinks from "./components/BottomLinks";
 import { SubButton } from "./components/SubButton";
 import { TopPage } from "./components/TopPage";
+import { useAppDispatch } from "../../../redux/hooks";
+import { setUser } from "../userSlice";
+import { To, useNavigate } from "react-router-dom";
+import loginReq from "./service/loginReq";
 
 const LogIn = () => {
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<inputs>({ mode: "onChange", criteriaMode: "all" });
-  const onSubmit = (data: inputs) => console.log(data);
+  const navigate = useNavigate();
+  const navigateTo = (to: To) => navigate(to);
+
+  const onSubmit = (data: inputs) => {
+    loginReq(data)
+      .then(() => {
+        dispatch(setUser(data.email));
+        navigateTo("/");
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <Container
       component="main"

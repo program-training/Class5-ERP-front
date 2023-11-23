@@ -7,9 +7,7 @@ export const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   });
 };
 export interface SignUpInputs {
-  firstName: string;
-  lastName: string;
-  Password: string;
+  password: string;
   email: string;
   managerPassword: string;
 }

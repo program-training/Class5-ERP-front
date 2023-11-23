@@ -1,4 +1,3 @@
-import { CSSProperties } from "react";
 import { SxProps } from "@mui/material";
 import { Theme } from "@mui/material";
 
