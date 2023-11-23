@@ -23,9 +23,9 @@ const InventoryPage = () => {
   const navigateTo = (to: To) => navigate(to);
   const dispatch = useAppDispatch();
   const { open } = useAppSelector((store) => store.error);
-  // const { chosenProduct } = useAppSelector(
-  //   (store) => store.inventory.inventoryProducts
-  // );
+  const { chosenProduct, allProducts, filteredProducts } = useAppSelector(
+    (store) => store.inventory.inventoryProducts
+  );
 
   const user = useAppSelector((store) => store.user.user);
 
@@ -38,7 +38,12 @@ const InventoryPage = () => {
       });
     }
   }, [user]);
-
+  useEffect(() => {
+    console.log("______");
+    console.log("all", allProducts);
+    console.log("filter", filteredProducts);
+    console.log("chose", chosenProduct);
+  }, [chosenProduct, allProducts, filteredProducts]);
   return (
     <Box>
       <AddProduct />

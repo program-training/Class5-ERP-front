@@ -9,23 +9,21 @@ import { useAppDispatch, useAppSelector } from "../../../../../redux/hooks";
 import { setFilteredProducts } from "../../../inventorySlice";
 
 const Search = () => {
-  const [helper, setHelper] = useState<adminProductInterface[]>([]);
   const [value, setValue] = useState<SetStateAction<string>>("");
-  const allProducts = useAppSelector(
-    (store) => store.inventory.inventoryProducts.allProducts
+  const { allProducts } = useAppSelector(
+    (store) => store.inventory.inventoryProducts
   );
   const dispatch = useAppDispatch();
   const handlerClick = () => {
+    const helper: adminProductInterface[] = [];
+    const regex = new RegExp(`${value}`, `i`);
     dispatch(setFilteredProducts(allProducts));
-
     allProducts.forEach((product) => {
-      const regex = new RegExp(`${value}`, `i`);
-
-      (helper && regex.test(product.name)) ||
-        (regex.test(product.category) && setHelper([...helper, product]));
+      if (regex.test(product.name) || regex.test(product.category))
+        helper.push(product);
     });
 
-    helper && dispatch(setFilteredProducts(helper));
+    dispatch(setFilteredProducts(helper));
   };
 
   return (
