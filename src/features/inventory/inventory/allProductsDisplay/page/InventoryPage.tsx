@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import { setAllProducts, setFilteredProducts } from "../../../inventorySlice";
 import { To, useNavigate } from "react-router-dom";
 import ROUTES from "../../../../../routes/RoutesModel";
-import { getUser } from "../../../../users/userSlice";
 import getProductFromServer from "../service/getProducts";
 
 const styleBoxTable = {
@@ -21,18 +20,19 @@ const styleBoxTable = {
 
 const InventoryPage = () => {
   const navigate = useNavigate();
+  const navigateTo = (to: To) => navigate(to);
   const dispatch = useAppDispatch();
-  dispatch(getUser());
+
   const user = useAppSelector((store) => store.user.user);
 
   useEffect(() => {
-    const navigateTo = (to: To) => navigate(to);
     if (user === null) navigateTo(ROUTES.login_page);
-
-    getProductFromServer().then((res) => {
-      dispatch(setAllProducts(res));
-      dispatch(setFilteredProducts(res));
-    });
+    else {
+      getProductFromServer().then((res) => {
+        dispatch(setAllProducts(res));
+        dispatch(setFilteredProducts(res));
+      });
+    }
   }, [user]);
 
   return (
