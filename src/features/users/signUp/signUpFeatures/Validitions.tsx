@@ -6,5 +6,10 @@ export const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     password: data.get("password"),
   });
 };
-const paten =
-  /((?=.*\d{1})(?=.*[A-Z]{1})(?=.*[a-z]{1})(?=.*[!@#$%^&*-]{1}).{7,20})/g;
+export interface SignUpInputs {
+  firstName: string;
+  lastName: string;
+  Password: string;
+  email: string;
+  managerPassword: string;
+}

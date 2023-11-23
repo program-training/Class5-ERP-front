@@ -35,7 +35,7 @@ const FormAddAndUpdate: FC<prop> = ({ Props }) => {
       component="form"
       open={open}
       onClose={() => setOpen(false)}
-      maxWidth={"lg"}
+      maxWidth={"sm"}
       onSubmit={handleSubmit(onSubmit)}
     >
       <DialogTitle

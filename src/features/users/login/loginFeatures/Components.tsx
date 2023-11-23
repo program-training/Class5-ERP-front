@@ -18,6 +18,7 @@ export function Bottom_links() {
           Forgot password?
         </Link>
       </Grid>
+      <Grid sx={{ color: "white" }}>gy</Grid>
       <Grid item>
         <Link href={ROUTES.sign_up} variant="body2">
           {"Don't have an account? Sign Up"}
