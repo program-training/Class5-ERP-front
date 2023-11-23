@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import { useState } from "react";
 interface Props {
   register: UseFormRegister<adminProductInterface>;
-  defaultValue: boolean;
+  defaultValue: boolean | true;
 }
 
 const styleRadoi = {
