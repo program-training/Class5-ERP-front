@@ -11,8 +11,8 @@ interface Props {
 
 const TableBodyModel = ({ setOpenDetails }: Props) => {
   const dispatch = useAppDispatch();
-  const filteredProducts = useAppSelector(
-    (store) => store.inventory.inventoryProducts.filteredProducts
+  const { filteredProducts } = useAppSelector(
+    (store) => store.inventory.inventoryProducts
   );
   return (
     <TableBody>

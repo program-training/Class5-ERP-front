@@ -21,7 +21,7 @@ const AppBarModel = ({ handleClose, setOpenUpdate, product }: Props) => {
           {product.name}
         </Typography>
         <Box>
-          <Buttons setOpenUpdate={setOpenUpdate} />
+          <Buttons setOpenUpdate={setOpenUpdate} handleClose={handleClose} />
         </Box>
       </Toolbar>
     </AppBar>

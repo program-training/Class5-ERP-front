@@ -9,7 +9,8 @@ import { useAppDispatch, useAppSelector } from "../../../../../redux/hooks";
 import { setFilteredProducts } from "../../../inventorySlice";
 
 const Search = () => {
-  const [value, setValue] = useState<SetStateAction<string>>();
+  const [helper, setHelper] = useState<adminProductInterface[]>([]);
+  const [value, setValue] = useState<SetStateAction<string>>("");
   const allProducts = useAppSelector(
     (store) => store.inventory.inventoryProducts.allProducts
   );
@@ -17,16 +18,14 @@ const Search = () => {
   const handlerClick = () => {
     dispatch(setFilteredProducts(allProducts));
 
-    const helper: adminProductInterface[] = [];
-
     allProducts.forEach((product) => {
       const regex = new RegExp(`${value}`, `i`);
 
-      regex.test(product.name)
-        ? helper.push(product)
-        : regex.test(product.category) && helper.push(product);
+      (helper && regex.test(product.name)) ||
+        (regex.test(product.category) && setHelper([...helper, product]));
     });
-    dispatch(setFilteredProducts(helper));
+
+    helper && dispatch(setFilteredProducts(helper));
   };
 
   return (
@@ -47,4 +46,5 @@ const Search = () => {
     </Paper>
   );
 };
+
 export default Search;
