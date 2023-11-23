@@ -1,34 +1,42 @@
 import TextField from "@mui/material/TextField";
 import { useForm } from "react-hook-form";
 import CssBaseline from "@mui/material/CssBaseline";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { Copyright } from "../signUp/signUpFeatures/Components";
-import { S1 } from "./signUpFeatures/Style";
-import { S2 } from "../login/loginFeatures/Style";
-import {
-  Bottom_links,
-  TopPage,
-  Sub_button,
-} from "../signUp/signUpFeatures/Components";
-import { ErrorMessage } from "@hookform/error-message";
-import Typography from "@mui/material/Typography";
+import { S1 } from "./components/Style";
 import {
   Password_validation,
   Email_validation,
-} from "../login/loginFeatures/Validation";
+} from "../login/components/Validation";
 import Grid from "@mui/material/Grid";
-import { SignUpInputs } from "./signUpFeatures/Validitions";
+import { SignUpInputs } from "./components/Validitions";
+import BottomLinks from "./components/BottomLinks";
+import SubButton from "./components/SubButton";
+import TopPage from "./components/TopPage";
+import signUpReq from "./service/signUpReq";
+import { To, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../../redux/hooks";
+import { setError } from "../../general/errorsSlice";
+import PopUP from "../../general/components/PopUp";
 
-export function SignUp() {
+const SignUp = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<SignUpInputs>({ mode: "onChange", criteriaMode: "all" });
-  const onSubmit = (data: SignUpInputs) => console.log(data);
+  const navigate = useNavigate();
+  const navigateTo = (to: To) => navigate(to);
+  const dispatch = useAppDispatch();
+  const onSubmit = (data: SignUpInputs) => {
+    const { password, email } = data;
+    const userToSend = { email, password };
+    signUpReq(userToSend)
+      .then(() => navigateTo("/"))
+      .catch((error) =>
+        dispatch(setError({ open: true, message: error.message }))
+      );
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -41,71 +49,31 @@ export function SignUp() {
           sx={{ mt: 3 }}
         >
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="given-name"
-                required
-                fullWidth
-                label="First Name"
-                autoFocus
-                {...register("firstName")}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                fullWidth
-                label="Last Name"
-                autoComplete="family-name"
-                {...register("lastName")}
-              />
-            </Grid>
             <Grid item xs={12}>
               <TextField
                 required
                 fullWidth
+                helperText={errors.email?.message}
+                error={errors.email ? true : false}
                 label="Email Address"
                 autoComplete="email"
                 {...register("email", Email_validation)}
               />
-              <ErrorMessage
-                errors={errors}
-                name="email"
-                render={({ messages }) =>
-                  messages &&
-                  Object.entries(messages).map(([type, message]) => (
-                    <Typography sx={S2} key={type}>
-                      {message}
-                    </Typography>
-                  ))
-                }
-              />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 required
                 fullWidth
-                label="Password"
+                helperText={errors.password?.message}
+                error={errors.password ? true : false}
+                label="password"
                 type="password"
                 autoComplete="new-password"
-                {...register("Password", Password_validation)}
-              />
-              <ErrorMessage
-                errors={errors}
-                name="Password"
-                render={({ messages }) =>
-                  messages &&
-                  Object.entries(messages).map(([type, message]) => (
-                    <Typography key={type} sx={S2}>
-                      {message}
-                    </Typography>
-                  ))
-                }
+                {...register("password", Password_validation)}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                required
                 fullWidth
                 label="manager-password"
                 type="password"
@@ -113,18 +81,13 @@ export function SignUp() {
                 {...register("managerPassword")}
               />
             </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="keep me signed"
-              />
-            </Grid>
           </Grid>
-          <Sub_button />
-          <Bottom_links />
+          <SubButton isValid={isValid} />
+          <BottomLinks />
         </Box>
       </Box>
-      <Copyright sx={{ mt: 5 }} />
+      <PopUP />
     </Container>
   );
-}
+};
+export default SignUp;

@@ -12,14 +12,17 @@ interface Props {
 }
 
 const ProductDetails = ({ openDetails, setOpenDetails }: Props) => {
-  const product = useAppSelector(
-    (store) => store.inventory.inventoryProducts.chosenProduct
+  const { chosenProduct } = useAppSelector(
+    (store) => store.inventory.inventoryProducts
   );
+
   const handleClose = () => {
     setOpenDetails(false);
   };
+
   const [openUpdate, setOpenUpdate] = useState(false);
-  if (!product) return;
+  if (!chosenProduct) return;
+
   return (
     <Box>
       <Dialog
@@ -31,10 +34,10 @@ const ProductDetails = ({ openDetails, setOpenDetails }: Props) => {
         <AppBarModel
           handleClose={handleClose}
           setOpenUpdate={setOpenUpdate}
-          product={product}
+          product={chosenProduct}
         />
         <Box sx={{ display: "flex", margin: 1 }}>
-          <Details product={product} />
+          <Details product={chosenProduct} />
           <Box
             sx={{
               display: "flex",
@@ -43,7 +46,11 @@ const ProductDetails = ({ openDetails, setOpenDetails }: Props) => {
               height: "100%",
             }}
           >
-            <img src={product.imageUrl} alt={product.imageAlt} width="100%" />
+            <img
+              src={chosenProduct.imageUrl}
+              alt={chosenProduct.imageAlt}
+              width="100%"
+            />
           </Box>
         </Box>
       </Dialog>
@@ -52,7 +59,7 @@ const ProductDetails = ({ openDetails, setOpenDetails }: Props) => {
           formType: "update",
           open: openUpdate,
           setOpen: setOpenUpdate,
-          product: product,
+          product: chosenProduct,
         }}
       />
     </Box>

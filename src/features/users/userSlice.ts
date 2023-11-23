@@ -1,20 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { UserInterface } from "./interface/userInterface";
 
 interface InitialState {
-  user: UserInterface | null;
+  user: string | null;
 }
 
 const initialState: InitialState = {
-  user: null,
+  user: localStorage.getItem("username") || null,
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<UserInterface>) => {
+    setUser: (state, action: PayloadAction<string | null>) => {
       state.user = action.payload;
       return state;
     },

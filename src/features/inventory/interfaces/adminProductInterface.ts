@@ -8,7 +8,7 @@ export interface adminProductInterface {
   discountPercentage: number;
   imageUrl: string;
   imageAlt: string;
-  isForSale: boolean;
+  isForSale: boolean | "true" | "false";
   costPrice: number;
   supplier: string;
 }

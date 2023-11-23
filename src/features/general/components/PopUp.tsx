@@ -7,7 +7,6 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
-import React from "react";
 import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
 import { setError } from "../errorsSlice";
 
@@ -17,15 +16,16 @@ const PopUP = () => {
   const handleClick = () => {
     dispatch(setError({ open: false }));
   };
+
   return (
     <Box>
-      <Dialog open={open}>
-        <DialogTitle>{title}</DialogTitle>
+      <Dialog open={open} maxWidth="lg">
+        <DialogTitle color="error">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText>{message}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClick} autoFocus>
+          <Button onClick={handleClick} autoFocus color="error">
             Close
           </Button>
         </DialogActions>

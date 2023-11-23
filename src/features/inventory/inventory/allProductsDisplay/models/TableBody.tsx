@@ -11,12 +11,12 @@ interface Props {
 
 const TableBodyModel = ({ setOpenDetails }: Props) => {
   const dispatch = useAppDispatch();
-  const filteredProducts = useAppSelector(
-    (store) => store.inventory.inventoryProducts.filteredProducts
+  const { filteredProducts } = useAppSelector(
+    (store) => store.inventory.inventoryProducts
   );
   return (
     <TableBody>
-      {filteredProducts.map((product, key) => (
+      {filteredProducts?.map((product, key) => (
         <StyledTableRow key={key}>
           <StyledTableCell
             sx={{ padding: "0px", margin: "0px" }}
