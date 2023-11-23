@@ -4,10 +4,13 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Search from "../../inventory/inventory/allProductsDisplay/components/Search";
 import { useAppSelector } from "../../../redux/hooks";
-import LogOutButton from "./LogOutButton";
+import LogOutMenu from "./LogOutMenu";
+import { useState } from "react";
+import IconButton from "@mui/material/IconButton";
 
 const Header = () => {
   const user = useAppSelector((store) => store.user.user);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   return (
     <Box>
@@ -15,8 +18,16 @@ const Header = () => {
         <AppBar position="static">
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <Search />
-            <LogOutButton />
-            <Avatar src="teamLogo.svg"></Avatar>
+            <LogOutMenu
+              anchorEl={anchorEl}
+              setAnchorEl={setAnchorEl}
+              userName={user}
+            />
+            <IconButton>
+              <Avatar onClick={(e) => setAnchorEl(e.currentTarget)}>
+                {user[0]}
+              </Avatar>
+            </IconButton>
           </Toolbar>
         </AppBar>
       )}
