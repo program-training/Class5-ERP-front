@@ -23,7 +23,7 @@ const LogIn = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<inputs>({ mode: "onChange", criteriaMode: "all" });
   const navigate = useNavigate();
   const navigateTo = (to: To) => navigate(to);
@@ -101,7 +101,7 @@ const LogIn = () => {
           </Grid>
 
           <BottomLinks />
-          <SubButton />
+          <SubButton isValid={isValid} />
         </Box>
       </Box>
       <PopUP />
