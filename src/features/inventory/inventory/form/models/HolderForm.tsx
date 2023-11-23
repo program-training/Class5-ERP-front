@@ -55,7 +55,7 @@ const HolderForm: FC<dinamicProps> = ({ Props }) => {
       />
       <IsForSaleField
         register={register}
-        defaultValue={product ? (product.isForSale as boolean) : true}
+        defaultValue={product ? Boolean(product.isForSale) : true}
       />
       <CostPriceField
         register={register}
