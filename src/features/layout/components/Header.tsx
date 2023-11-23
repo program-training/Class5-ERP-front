@@ -23,10 +23,8 @@ const Header = () => {
               setAnchorEl={setAnchorEl}
               userName={user}
             />
-            <IconButton>
-              <Avatar onClick={(e) => setAnchorEl(e.currentTarget)}>
-                {user[0]}
-              </Avatar>
+            <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
+              <Avatar>{user[0]}</Avatar>
             </IconButton>
           </Toolbar>
         </AppBar>

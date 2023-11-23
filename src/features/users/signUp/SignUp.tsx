@@ -15,6 +15,9 @@ import SubButton from "./components/SubButton";
 import TopPage from "./components/TopPage";
 import signUpReq from "./service/signUpReq";
 import { To, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../../redux/hooks";
+import { setError } from "../../general/errorsSlice";
+import PopUP from "../../general/components/PopUp";
 
 const SignUp = () => {
   const {
@@ -24,12 +27,15 @@ const SignUp = () => {
   } = useForm<SignUpInputs>({ mode: "onChange", criteriaMode: "all" });
   const navigate = useNavigate();
   const navigateTo = (to: To) => navigate(to);
+  const dispatch = useAppDispatch();
   const onSubmit = (data: SignUpInputs) => {
     const { password, email } = data;
     const userToSend = { email, password };
     signUpReq(userToSend)
       .then(() => navigateTo("/"))
-      .catch((error) => console.log(error));
+      .catch((error) =>
+        dispatch(setError({ open: true, message: error.message }))
+      );
   };
   return (
     <Container component="main" maxWidth="xs">
@@ -80,6 +86,7 @@ const SignUp = () => {
           <BottomLinks />
         </Box>
       </Box>
+      <PopUP />
     </Container>
   );
 };

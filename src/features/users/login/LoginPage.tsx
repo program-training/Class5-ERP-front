@@ -15,6 +15,8 @@ import { useAppDispatch } from "../../../redux/hooks";
 import { setUser } from "../userSlice";
 import { To, useNavigate } from "react-router-dom";
 import loginReq from "./service/loginReq";
+import { setError } from "../../general/errorsSlice";
+import PopUP from "../../general/components/PopUp";
 
 const LogIn = () => {
   const dispatch = useAppDispatch();
@@ -32,7 +34,9 @@ const LogIn = () => {
         dispatch(setUser(data.email));
         navigateTo("/");
       })
-      .catch((error) => console.log(error));
+      .catch((error) =>
+        dispatch(setError({ open: true, message: error.message }))
+      );
   };
 
   return (
@@ -100,6 +104,7 @@ const LogIn = () => {
           <SubButton />
         </Box>
       </Box>
+      <PopUP />
     </Container>
   );
 };
