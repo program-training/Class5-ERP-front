@@ -47,8 +47,8 @@ const FormAddAndUpdate: FC<prop> = ({ Props }) => {
             authorization: token,
           },
         })
-        .then(() => {
-          helperButton(newProduct, "add");
+        .then((res) => {
+          helperButton(res.data[0], "add");
         })
         .catch((error) => {
           dispatch(
@@ -70,8 +70,8 @@ const FormAddAndUpdate: FC<prop> = ({ Props }) => {
             },
           }
         )
-        .then(() => {
-          helperButton(newProduct, "update");
+        .then((res) => {
+          helperButton(res.data[0], "update");
         })
         .catch((error) => {
           dispatch(

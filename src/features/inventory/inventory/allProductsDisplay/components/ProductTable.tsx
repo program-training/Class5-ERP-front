@@ -5,11 +5,9 @@ import ProductDetails from "../../specificProduct/components/ProductDetails";
 import { useState } from "react";
 import TableHeadModel from "../models/TableHead";
 import TableBodyModel from "../models/TableBody";
-import { useAppSelector } from "../../../../../redux/hooks";
 
 const ProductTable = () => {
   const [openDetails, setOpenDetails] = useState(false);
-  const products = useAppSelector((store) => store.inventory.inventoryProducts);
   return (
     <>
       <TableContainer component={Paper}>
@@ -18,12 +16,11 @@ const ProductTable = () => {
           <TableBodyModel setOpenDetails={setOpenDetails} />
         </Table>
       </TableContainer>
-      {products.chosenProduct && (
-        <ProductDetails
-          openDetails={openDetails}
-          setOpenDetails={setOpenDetails}
-        />
-      )}
+
+      <ProductDetails
+        openDetails={openDetails}
+        setOpenDetails={setOpenDetails}
+      />
     </>
   );
 };
