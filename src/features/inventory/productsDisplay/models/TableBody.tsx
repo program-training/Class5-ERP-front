@@ -16,7 +16,8 @@ const TableBodyModel = () => {
         <StyledTableRow key={key} sx={{
           '&:hover': {
             cursor: 'pointer',
-            backgroundColor: '#dbdbdb'
+            backgroundColor: '#dbdbdb',
+            transition: 'background-color 0.2s',
           }  
         }}>
           <StyledTableCell
