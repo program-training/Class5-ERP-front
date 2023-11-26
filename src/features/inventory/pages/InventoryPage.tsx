@@ -24,9 +24,7 @@ const InventoryPage = () => {
   const navigate = useNavigate();
   const navigateTo = (to: To) => navigate(to);
   const dispatch = useAppDispatch();
-  // const { chosenProduct, allProducts, filteredProducts } = useAppSelector(
-  //   (store) => store.inventory.inventoryProducts
-  // );
+
   const { open } = useAppSelector((store) => store.alert);
   const user = useAppSelector((store) => store.user.user);
   useEffect(() => {
@@ -35,16 +33,10 @@ const InventoryPage = () => {
       getProductsFromServer().then((res) => {
         dispatch(setAllProducts(res));
         dispatch(setFilteredProducts(res));
-        // dispatch(setError({ open: true, title: "success", message: "!!!" }));
       });
     }
   }, [user]);
-  // useEffect(() => {
-  //   console.log("______");
-  //   console.log("all", allProducts);
-  //   console.log("filter", filteredProducts);
-  //   console.log("chose", chosenProduct);
-  // }, [chosenProduct, allProducts, filteredProducts]);
+
   return (
     <Box sx={{ backgroundColor: "#D0D3D9" }}>
       <Box sx={styleBoxTable}>

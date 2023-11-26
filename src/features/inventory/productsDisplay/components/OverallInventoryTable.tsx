@@ -6,6 +6,7 @@ import CategoryTwoToneIcon from "@mui/icons-material/CategoryTwoTone";
 import InventoryTwoToneIcon from "@mui/icons-material/InventoryTwoTone";
 import Inventory2TwoToneIcon from "@mui/icons-material/Inventory2TwoTone";
 import IndeterminateCheckBoxTwoToneIcon from "@mui/icons-material/IndeterminateCheckBoxTwoTone";
+import React from "react";
 
 const OverallInventoryTable = () => {
   const products = useAppSelector((store) => store.inventory.inventoryProducts);
@@ -50,7 +51,7 @@ const OverallInventoryTable = () => {
 
         {overallData &&
           overallData.map((d) => (
-            <>
+            <React.Fragment key={d.name}>
               <Box alignItems="center">
                 <Box
                   sx={{
@@ -69,7 +70,7 @@ const OverallInventoryTable = () => {
                 </Box>
               </Box>
               <Divider orientation="vertical" flexItem />
-            </>
+            </React.Fragment>
           ))}
       </Paper>
     </>
