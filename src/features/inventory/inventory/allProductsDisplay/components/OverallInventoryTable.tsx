@@ -51,7 +51,7 @@ const OverallInventoryTable = () => {
         {overallData &&
           overallData.map((d) => (
             <>
-              <Box alignItems="center" spacing={3}>
+              <Box alignItems="center">
                 <Box
                   sx={{
                     display: "flex",
