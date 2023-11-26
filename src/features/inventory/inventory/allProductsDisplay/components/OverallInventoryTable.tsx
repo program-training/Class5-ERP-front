@@ -11,7 +11,6 @@ const OverallInventoryTable = () => {
   const products = useAppSelector((store) => store.inventory.inventoryProducts);
   const { sumCategories, sumProducts, sumLowInStock, sumOutOfStock } =
     getProductsDetails(products.allProducts);
-  // "error" | "inherit" | "action" | "disabled" | "primary" | "secondary" | "info" | "success" | "warning"
   const overallData = [
     {
       name: "Categories",
