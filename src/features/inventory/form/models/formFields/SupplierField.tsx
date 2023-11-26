@@ -22,7 +22,7 @@ const SupplierField = ({ register, error, defaultValue }: Props) => {
           message: "Must be at least two characters",
         },
         pattern: {
-          value: /^[a-zA-Z\s-.&]+$/,
+          value: /^(?=.*[a-zA-Z].*[a-zA-Z])[\w @#$%^&*()_+={};:<>|./?,-]*$/,
           message:
             "Only uppercase letters, lowercase letters and spaces should be entered",
         },

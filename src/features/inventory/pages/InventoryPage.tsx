@@ -24,9 +24,9 @@ const InventoryPage = () => {
   const navigate = useNavigate();
   const navigateTo = (to: To) => navigate(to);
   const dispatch = useAppDispatch();
-  const { chosenProduct, allProducts, filteredProducts } = useAppSelector(
-    (store) => store.inventory.inventoryProducts
-  );
+  // const { chosenProduct, allProducts, filteredProducts } = useAppSelector(
+  //   (store) => store.inventory.inventoryProducts
+  // );
   const { open } = useAppSelector((store) => store.alert);
   const user = useAppSelector((store) => store.user.user);
   useEffect(() => {
