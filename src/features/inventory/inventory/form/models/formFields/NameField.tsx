@@ -22,7 +22,7 @@ const NameField = ({ register, error, defaultValue }: Props) => {
           message: "Must be at least two characters",
         },
         pattern: {
-          value: /^[A-Za-z0-9]*$/,
+          value: /^(?=.*[a-zA-Z].*[a-zA-Z])[\w @#$%^&*()_+={};:<>|./?,-]*$/,
           message:
             "Only uppercase letters, lowercase letters and spaces should be entered",
         },
