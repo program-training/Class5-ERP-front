@@ -1,145 +1,76 @@
-import { Box, Grid, Paper, Stack, Typography } from "@mui/material";
+import { Box, Paper, Stack, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import { useAppSelector } from "../../../../../redux/hooks";
 import { getProductsDetails } from "../helpers/helpers";
-import TableTitle from "./TableTitle";
+import CategoryTwoToneIcon from "@mui/icons-material/CategoryTwoTone";
+import InventoryTwoToneIcon from "@mui/icons-material/InventoryTwoTone";
+import Inventory2TwoToneIcon from "@mui/icons-material/Inventory2TwoTone";
+import IndeterminateCheckBoxTwoToneIcon from "@mui/icons-material/IndeterminateCheckBoxTwoTone";
 
 const OverallInventoryTable = () => {
   const products = useAppSelector((store) => store.inventory.inventoryProducts);
   const { sumCategories, sumProducts, sumLowInStock, sumOutOfStock } =
     getProductsDetails(products.allProducts);
+  // "error" | "inherit" | "action" | "disabled" | "primary" | "secondary" | "info" | "success" | "warning"
+  const overallData = [
+    {
+      name: "Categories",
+      data: sumCategories,
+      icon: <CategoryTwoToneIcon color="inherit" fontSize="large" />,
+    },
+    {
+      name: "Total Products",
+      data: sumProducts,
+      icon: <InventoryTwoToneIcon color="info" fontSize="large" />,
+    },
+    {
+      name: "Low Stock",
+      data: sumLowInStock,
+      icon: <Inventory2TwoToneIcon color="warning" fontSize="large" />,
+    },
+    {
+      name: "Not In Stock",
+      data: sumOutOfStock,
+      icon: <IndeterminateCheckBoxTwoToneIcon color="error" fontSize="large" />,
+    },
+  ];
   return (
     <>
-      <Box
+      <Paper
         sx={{
-          flexGrow: 1,
+          height: "auto",
           width: "100%",
-          borderRadius: 4,
+          display: "flex",
+          borderRadius: 2,
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
-        <Paper
-          sx={{
-            height: "100%",
-            borderRadius: 2,
-          }}
-        >
-          <TableTitle title="Overall inventory" />
-          <Grid container>
-            <Grid item xs={12} sm={6} md={6} lg={3}>
-              <Box
-                minHeight={"3em"}
-                sx={{
-                  width: "100%",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Stack direction="column" alignItems="center" spacing={3}>
-                  <Typography variant="body1" fontSize="35px" color="primary">
-                    Categories
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    fontSize="35px"
-                    sx={{ color: "gray" }}
-                  >
-                    {sumCategories}
-                  </Typography>
-                </Stack>
-                <Divider orientation="vertical" sx={{ marginLeft: "80px" }} />
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={3}>
-              <Box
-                sx={{
-                  width: "100%",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Stack direction="column" alignItems="center" spacing={3}>
-                  <Typography
-                    variant="body1"
-                    fontSize="34px"
-                    sx={{ color: "#E19133" }}
-                  >
-                    Total Products
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    fontSize="35px"
-                    sx={{ color: "gray" }}
-                  >
-                    {sumProducts}
-                  </Typography>
-                </Stack>
-                <Divider orientation="vertical" sx={{ marginLeft: "80px" }} />
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={3}>
-              <Box
-                sx={{
-                  width: "100%",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Stack direction="column" alignItems="center" spacing={3}>
-                  <Typography
-                    variant="body1"
-                    fontSize="35px"
-                    sx={{ color: "#845EBC" }}
-                  >
-                    Low Stock
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    fontSize="35px"
-                    sx={{ color: "gray" }}
-                  >
-                    {sumLowInStock}
-                  </Typography>
-                </Stack>
-                <Divider orientation="vertical" sx={{ marginLeft: "80px" }} />
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={3}>
-              <Box
-                sx={{
-                  width: "100%",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Stack direction="column" alignItems="center" spacing={3}>
-                  <Typography
-                    variant="body1"
-                    fontSize="35px"
-                    sx={{ color: "#F36960" }}
-                  >
-                    Not In Stock
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    fontSize="35px"
-                    sx={{ color: "gray" }}
-                  >
-                    {sumOutOfStock}
-                  </Typography>
-                </Stack>
-              </Box>
-            </Grid>
-          </Grid>
-        </Paper>
-      </Box>
+        <Divider orientation="vertical" flexItem />
+
+        {overallData &&
+          overallData.map((d) => (
+            <>
+              <Stack alignItems="center" spacing={3}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "space-between",
+                  }}
+                >
+                  {d.icon}
+                  <Typography variant="h4">{d.data}</Typography>
+                </Box>
+                <Typography variant="overline" color="#9e9e9e">
+                  {d.name}
+                </Typography>
+              </Stack>
+              <Divider orientation="vertical" flexItem />
+            </>
+          ))}
+      </Paper>
     </>
   );
 };
