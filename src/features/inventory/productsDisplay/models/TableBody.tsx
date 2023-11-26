@@ -13,7 +13,12 @@ const TableBodyModel = () => {
   return (
     <TableBody>
       {filteredProducts?.map((product, key) => (
-        <StyledTableRow key={key}>
+        <StyledTableRow key={key} sx={{
+          '&:hover': {
+            cursor: 'pointer',
+            backgroundColor: '#dbdbdb'
+          }  
+        }}>
           <StyledTableCell
             sx={{ padding: "0px", margin: "0px" }}
             onClick={() => {
