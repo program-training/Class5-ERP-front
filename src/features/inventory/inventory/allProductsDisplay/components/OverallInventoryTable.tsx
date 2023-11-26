@@ -1,4 +1,4 @@
-import { Box, Paper, Stack, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import { useAppSelector } from "../../../../../redux/hooks";
 import { getProductsDetails } from "../helpers/helpers";
@@ -51,21 +51,23 @@ const OverallInventoryTable = () => {
         {overallData &&
           overallData.map((d) => (
             <>
-              <Stack alignItems="center" spacing={3}>
+              <Box alignItems="center" spacing={3}>
                 <Box
                   sx={{
                     display: "flex",
                     flexDirection: "row",
-                    alignItems: "space-between",
+                    justifyContent: "space-between",
                   }}
                 >
                   {d.icon}
                   <Typography variant="h4">{d.data}</Typography>
                 </Box>
-                <Typography variant="overline" color="#9e9e9e">
-                  {d.name}
-                </Typography>
-              </Stack>
+                <Box>
+                  <Typography variant="h6" color="#9e9e9e">
+                    {d.name}
+                  </Typography>
+                </Box>
+              </Box>
               <Divider orientation="vertical" flexItem />
             </>
           ))}
