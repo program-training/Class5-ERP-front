@@ -15,8 +15,8 @@ import { useAppDispatch } from "../../../redux/hooks";
 import { setUser } from "../userSlice";
 import { To, useNavigate } from "react-router-dom";
 import loginReq from "./service/loginReq";
-import { setError } from "../../general/errorsSlice";
-import PopUP from "../../general/components/PopUp";
+import { setAlert } from "../../inventory/alert/utils/alertSlices";
+import Alert from "../../inventory/alert/component/Alert";
 
 const LogIn = () => {
   const dispatch = useAppDispatch();
@@ -35,7 +35,7 @@ const LogIn = () => {
         navigateTo("/");
       })
       .catch((error) =>
-        dispatch(setError({ open: true, message: error.message }))
+        dispatch(setAlert({ open: true, message: error.message }))
       );
   };
 
@@ -104,7 +104,7 @@ const LogIn = () => {
           <SubButton isValid={isValid} />
         </Box>
       </Box>
-      <PopUP />
+      <Alert />
     </Container>
   );
 };

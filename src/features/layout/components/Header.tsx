@@ -2,7 +2,7 @@ import Avatar from "@mui/material/Avatar";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Search from "../../inventory/inventory/allProductsDisplay/components/Search";
+import Search from "../../inventory/productsDisplay/components/Search";
 import { useAppSelector } from "../../../redux/hooks";
 import LogOutMenu from "./LogOutMenu";
 import { useState } from "react";

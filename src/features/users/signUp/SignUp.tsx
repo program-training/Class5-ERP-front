@@ -16,8 +16,8 @@ import TopPage from "./components/TopPage";
 import signUpReq from "./service/signUpReq";
 import { To, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../redux/hooks";
-import { setError } from "../../general/errorsSlice";
-import PopUP from "../../general/components/PopUp";
+import { setAlert } from "../../inventory/alert/utils/alertSlices";
+import Alert from "../../inventory/alert/component/Alert";
 
 const SignUp = () => {
   const {
@@ -34,7 +34,7 @@ const SignUp = () => {
     signUpReq(userToSend)
       .then(() => navigateTo("/"))
       .catch((error) =>
-        dispatch(setError({ open: true, message: error.message }))
+        dispatch(setAlert({ open: true, message: error.message }))
       );
   };
   return (
@@ -86,7 +86,7 @@ const SignUp = () => {
           <BottomLinks />
         </Box>
       </Box>
-      <PopUP />
+      <Alert />
     </Container>
   );
 };

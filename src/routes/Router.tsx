@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import ROUTES from "./RoutesModel";
 import LogIn from "../features/users/login/LoginPage";
 import SignUp from "../features/users/signUp/SignUp";
-import InventoryPage from "../features/inventory/inventory/allProductsDisplay/page/InventoryPage";
+import InventoryPage from "../features/inventory/pages/InventoryPage";
 
 const Router = () => {
   return (
