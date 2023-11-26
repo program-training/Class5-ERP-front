@@ -11,4 +11,5 @@ export interface adminProductInterface {
   isForSale: boolean | "true" | "false";
   costPrice: number;
   supplier: string;
+  createdBy: string;
 }
