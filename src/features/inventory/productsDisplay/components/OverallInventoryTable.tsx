@@ -1,110 +1,77 @@
-import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import { useAppSelector } from "../../../../redux/hooks";
 import { getProductsDetails } from "../helpers/helpers";
+import CategoryTwoToneIcon from "@mui/icons-material/CategoryTwoTone";
+import InventoryTwoToneIcon from "@mui/icons-material/InventoryTwoTone";
+import Inventory2TwoToneIcon from "@mui/icons-material/Inventory2TwoTone";
+import IndeterminateCheckBoxTwoToneIcon from "@mui/icons-material/IndeterminateCheckBoxTwoTone";
 
 const OverallInventoryTable = () => {
   const products = useAppSelector((store) => store.inventory.inventoryProducts);
   const { sumCategories, sumProducts, sumLowInStock, sumOutOfStock } =
     getProductsDetails(products.allProducts);
+  const overallData = [
+    {
+      name: "Categories",
+      data: sumCategories,
+      icon: <CategoryTwoToneIcon color="inherit" fontSize="large" />,
+    },
+    {
+      name: "Total Products",
+      data: sumProducts,
+      icon: <InventoryTwoToneIcon color="info" fontSize="large" />,
+    },
+    {
+      name: "Low Stock",
+      data: sumLowInStock,
+      icon: <Inventory2TwoToneIcon color="warning" fontSize="large" />,
+    },
+    {
+      name: "Not In Stock",
+      data: sumOutOfStock,
+      icon: <IndeterminateCheckBoxTwoToneIcon color="error" fontSize="large" />,
+    },
+  ];
   return (
     <>
-      <Box
+      <Paper
         sx={{
-          flexGrow: 1,
+          height: "auto",
           width: "100%",
-          borderRadius: 4,
-          bgcolor: "#F0F1F3",
-          paddingTop: "15px",
-          paddingBottom: "15px",
+          display: "flex",
+          borderRadius: 2,
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
-        <Grid container sx={{ height: "100%", padding: "10px" }}>
-          <Grid item xs={12} sm={6} md={6} lg={3}>
-            <Box
-              sx={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-              }}
-            >
-              <Stack direction="column" alignItems="flex-start" spacing={3}>
-                <Typography variant="h4" sx={{ color: "#1570EF" }}>
-                  Categories
-                </Typography>
-                <Typography variant="h6" sx={{ color: "gray" }}>
-                  all the categories: {sumCategories}
-                </Typography>
-              </Stack>
-              <Divider orientation="vertical" sx={{ marginLeft: "80px" }} />
-            </Box>
-          </Grid>
-          <Grid item xs={12} sm={6} md={6} lg={3}>
-            <Box
-              sx={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-              }}
-            >
-              <Stack direction="column" alignItems="flex-start" spacing={3}>
-                <Typography variant="h4" sx={{ color: "#E19133" }}>
-                  Total Products
-                </Typography>
-                <Typography variant="h6" sx={{ color: "gray" }}>
-                  sum of all products: {sumProducts}
-                </Typography>
-              </Stack>
-              <Divider orientation="vertical" sx={{ marginLeft: "80px" }} />
-            </Box>
-          </Grid>
-          <Grid item xs={12} sm={6} md={6} lg={3}>
-            <Box
-              sx={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-              }}
-            >
-              <Stack direction="column" alignItems="flex-start" spacing={3}>
-                <Typography variant="h4" sx={{ color: "#845EBC" }}>
-                  Low Stocks
-                </Typography>
-                <Typography variant="h6" sx={{ color: "gray" }}>
-                  products below 5 in stock: {sumLowInStock}
-                </Typography>
-              </Stack>
-              <Divider orientation="vertical" sx={{ marginLeft: "80px" }} />
-            </Box>
-          </Grid>
-          <Grid item xs={12} sm={6} md={6} lg={3}>
-            <Box
-              sx={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-              }}
-            >
-              <Stack direction="column" alignItems="flex-start" spacing={3}>
-                <Typography variant="h4" sx={{ color: "#F36960" }}>
-                  Not In Stocks
-                </Typography>
-                <Typography variant="h6" sx={{ color: "gray" }}>
-                  products out of stocks: {sumOutOfStock}
-                </Typography>
-              </Stack>
-            </Box>
-          </Grid>
-        </Grid>
-      </Box>
+        <Divider orientation="vertical" flexItem />
+
+        {overallData &&
+          overallData.map((d) => (
+            <>
+              <Box alignItems="center">
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  {d.icon}
+                  <Typography variant="h4">{d.data}</Typography>
+                </Box>
+                <Box>
+                  <Typography variant="h6" color="#9e9e9e">
+                    {d.name}
+                  </Typography>
+                </Box>
+              </Box>
+              <Divider orientation="vertical" flexItem />
+            </>
+          ))}
+      </Paper>
     </>
   );
 };
