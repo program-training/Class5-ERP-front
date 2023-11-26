@@ -3,6 +3,8 @@ import ROUTES from "./RoutesModel";
 import LogIn from "../features/users/login/LoginPage";
 import SignUp from "../features/users/signUp/SignUp";
 import InventoryPage from "../features/inventory/pages/InventoryPage";
+import InventoryPage from "../features/inventory/inventory/allProductsDisplay/page/InventoryPage";
+import ErrorPage from "../features/general/pages/ErrorPage";
 
 const Router = () => {
   return (
@@ -10,7 +12,7 @@ const Router = () => {
       <Route path={ROUTES.HOME} element={<InventoryPage />} />
       <Route path={ROUTES.login_page} element={<LogIn />} />
       <Route path={ROUTES.sign_up} element={<SignUp />} />
-      <Route path={ROUTES.ERROR} element={""} />
+      <Route path={ROUTES.ERROR} element={<ErrorPage />} />
     </Routes>
   );
 };

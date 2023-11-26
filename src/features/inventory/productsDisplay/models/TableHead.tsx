@@ -1,4 +1,4 @@
-import { TableRow } from "@mui/material";
+import { TableRow, Typography } from "@mui/material";
 import { StyledTableCell } from "../styles/styleLabelCell";
 import TableHead from "@mui/material/TableHead";
 
@@ -7,13 +7,18 @@ interface Props {
 }
 
 const TableHeadModel = ({ viewImage: viewImage }: Props) => {
+  const headTitle = ["Image", "Category", "Name", "Quantity"];
   return (
     <TableHead>
       <TableRow>
-        {viewImage && <StyledTableCell align="center">image</StyledTableCell>}
-        <StyledTableCell align="center">category</StyledTableCell>
-        <StyledTableCell align="center">name</StyledTableCell>
-        <StyledTableCell align="center">quantity</StyledTableCell>
+        {viewImage &&
+          headTitle.map((title, i) => (
+            <StyledTableCell key={i} align="center">
+              <Typography key={i} variant="body2" fontSize="20px">
+                {title}
+              </Typography>
+            </StyledTableCell>
+          ))}
       </TableRow>
     </TableHead>
   );

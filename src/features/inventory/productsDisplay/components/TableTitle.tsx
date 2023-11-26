@@ -6,7 +6,7 @@ interface Props {
 
 const TableTitle = ({ title }: Props) => {
   return (
-    <Typography color="primary" variant="h6">
+    <Typography variant="subtitle1" fontSize="35px">
       {title}
     </Typography>
   );
