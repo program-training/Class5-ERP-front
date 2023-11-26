@@ -15,7 +15,6 @@ const styleBoxTable = {
   margin: "10px",
   display: "flex",
   flexDirection: "column",
-  justifyContent: "space-around",
   alignItems: "center",
 };
 const InventoryPage = () => {
@@ -45,13 +44,12 @@ const InventoryPage = () => {
     console.log("chose", chosenProduct);
   }, [chosenProduct, allProducts, filteredProducts]);
   return (
-    <Box>
-      <AddProduct />
+    <Box sx={{ backgroundColor: "#D0D3D9" }}>
       <Box sx={styleBoxTable}>
-        <TableTitle title="Overall inventory" />
         <OverallInventoryTable />
       </Box>
       <Box sx={styleBoxTable}>
+        <AddProduct />
         <TableTitle title="Products" />
         <ProductTable />
         {open && <PopUP />}

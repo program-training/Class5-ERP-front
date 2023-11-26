@@ -24,7 +24,7 @@ const LogOutMenu = ({ anchorEl, setAnchorEl, userName }: Props) => {
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: "top",
+        vertical: "bottom",
         horizontal: "right",
       }}
       keepMounted
