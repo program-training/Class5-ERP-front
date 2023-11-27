@@ -38,6 +38,8 @@ const FormAddAndUpdate = ({ Props }: Props) => {
   });
 
   const onSubmit = (newProduct: adminProductInterface) => {
+    if (chosenProduct?.createdBy)
+      newProduct.createdBy = chosenProduct.createdBy;
     pending();
     if (formType === "addition") submitAdd(newProduct);
     if (chosenProduct && formType === "update")

@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import TableTitle from "../productsDisplay/components/TableTitle";
 import ProductTable from "../productsDisplay/components/ProductTable";
 import OverallInventoryTable from "../productsDisplay/components/OverallInventoryTable";
-import AddProduct from "../actions/components/AddProduct";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { useEffect } from "react";
 import {
@@ -13,6 +12,8 @@ import { To, useNavigate } from "react-router-dom";
 import ROUTES from "../../../routes/RoutesModel";
 import getProductsFromServer from "../actions/services/getProducts";
 import Alert from "../alert/component/Alert";
+import ButtonToTop from "../productsDisplay/components/ButtonToTop";
+import ButtonAddProduct from "../productsDisplay/components/ButtonAddProduct";
 
 const styleBoxTable = {
   margin: "10px",
@@ -43,11 +44,12 @@ const InventoryPage = () => {
         <OverallInventoryTable />
       </Box>
       <Box sx={styleBoxTable}>
-        <AddProduct />
         <TableTitle title="Products" />
         <ProductTable />
         {open && <Alert />}
       </Box>
+      <ButtonToTop />
+      <ButtonAddProduct />
     </Box>
   );
 };
