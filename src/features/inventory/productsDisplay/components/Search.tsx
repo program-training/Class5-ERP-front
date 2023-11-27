@@ -19,7 +19,12 @@ const Search = () => {
     const regex = new RegExp(`${value}`, `i`);
     dispatch(setFilteredProducts(allProducts));
     allProducts.forEach((product) => {
-      if (regex.test(product.name) || regex.test(product.category))
+      if (
+        regex.test(product.name) ||
+        regex.test(product.category) ||
+        regex.test(product.createdBy) ||
+        regex.test(product.supplier)
+      )
         helper.push(product);
     });
 
@@ -33,7 +38,7 @@ const Search = () => {
     >
       <InputBase
         sx={{ ml: 2, flex: 1 }}
-        placeholder="search product or category"
+        placeholder="product, category, user added, supplier"
         value={value}
         onChange={(e) => setValue(`${e.target.value}`)}
       />

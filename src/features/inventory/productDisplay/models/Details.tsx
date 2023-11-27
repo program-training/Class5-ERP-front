@@ -1,57 +1,40 @@
-import { Box, Divider, ListItem, ListItemText } from "@mui/material";
+import { Box } from "@mui/material";
 import { adminProductInterface } from "../../interfaces/adminProductInterface";
+import Item from "./Item";
 
 interface Props {
   product: adminProductInterface;
 }
 
 const Details = ({ product }: Props) => {
-  const lables = Object.keys(product) as Array<keyof adminProductInterface>;
   return (
     <Box
       sx={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
-        width: "700px",
+        justifyContent: "center",
+        alignItems: "start",
+        width: "500px",
       }}
     >
-      {lables.map(
-        (lable, key) =>
-          lable !== "id" &&
-          lable !== "imageUrl" &&
-          lable !== "imageAlt" && (
-            <Box key={key}>
-              <ListItem>
-                <ListItemText
-                  secondary={
-                    lable === "isForSale"
-                      ? "is for sale"
-                      : lable === "costPrice"
-                      ? "cost price"
-                      : lable === "salePrice"
-                      ? "sale price"
-                      : lable === "discountPercentage"
-                      ? "discount percentage"
-                      : lable
-                  }
-                  sx={{ alignItems: "start", width: "250px" }}
-                />
-                <ListItemText
-                  primary={
-                    product[lable] === true
-                      ? "yes"
-                      : product[lable] === false
-                      ? "no"
-                      : product[lable]
-                  }
-                  sx={{ alignItems: "start", width: "400px" }}
-                />
-              </ListItem>
-              <Divider />
-            </Box>
-          )
-      )}
+      <Item item="name:" value={product.name} divider="top" />
+      <Item item="category:" value={product.category} divider="none" />
+      <Item item="description:" value={product.description} divider="bottom" />
+      <Item
+        item="is for sale:"
+        value={product.isForSale ? "yes" : "no"}
+        divider="none"
+      />
+      <Item item="quantity:" value={product.quantity} divider="bottom" />
+      <Item item="cost price:" value={`${product.costPrice}$`} divider="none" />
+      <Item item="sale price:" value={`${product.salePrice}$`} divider="none" />
+      <Item
+        item="discount percentage:"
+        value={`${product.discountPercentage}%`}
+        divider="bottom"
+      />
+      <Item item="created by:" value={`${product.createdBy}`} divider="none" />
+      <Item item="supplier:" value={`${product.supplier}`} divider="bottom" />
     </Box>
   );
 };
