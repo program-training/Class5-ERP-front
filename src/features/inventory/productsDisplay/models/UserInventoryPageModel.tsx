@@ -2,22 +2,25 @@ import { TableBody } from "@mui/material";
 import { StyledTableCell } from "../styles/styleLabelCell";
 import { StyledTableRow } from "../styles/styleLabelRow";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import { setChosenProduct } from "../utils/inventorySlice";
+import { setChosenProduct, setUserProducts } from "../utils/inventorySlice";
 import { setOpenPageProducts } from "../utils/inventorySlice";
+import getUserProductsFromServer from "../../actions/services/UserProducts";
+import { useEffect } from "react";
 
-export interface ProductsProps {
-  name: string;
-}
-
-const TableBodyModel = () => {
+const UserProductsPage = () => {
   const dispatch = useAppDispatch();
-  const { filteredProducts } = useAppSelector(
+
+  useEffect(() => {
+    getUserProductsFromServer().then((res) => dispatch(setUserProducts(res)));
+  }, []);
+
+  const { userProducts } = useAppSelector(
     (store) => store.inventory.inventoryProducts
   );
 
   return (
     <TableBody>
-      {filteredProducts?.map((product, key) => (
+      {userProducts?.map((product, key) => (
         <StyledTableRow
           key={key}
           sx={{
@@ -71,4 +74,4 @@ const TableBodyModel = () => {
   );
 };
 
-export default TableBodyModel;
+export default UserProductsPage;
