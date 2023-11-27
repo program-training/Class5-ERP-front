@@ -16,13 +16,8 @@ import ButtonToTop from "../productsDisplay/components/ButtonToTop";
 import ButtonAddProduct from "../productsDisplay/components/ButtonAddProduct";
 import UserProductsButton from "../userInventory/components/UserProductsButton";
 import UserProducts from "../userInventory/components/UserInventoryPage";
+import { S1, S2 } from "./style/PageStyle";
 
-const styleBoxTable = {
-  margin: "10px",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-};
 const InventoryPage = () => {
   const navigate = useNavigate();
   const navigateTo = (to: To) => navigate(to);
@@ -42,12 +37,12 @@ const InventoryPage = () => {
   }, [user]);
 
   return (
-    <Box sx={{ backgroundColor: "#D0D3D9" }}>
-      <Box sx={styleBoxTable}>
+    <Box sx={S1}>
+      <Box sx={S2}>
         <UserProductsButton />
         <OverallInventoryTable />
       </Box>
-      <Box sx={styleBoxTable}>
+      <Box sx={S2}>
         <TableTitle title="Products" />
         <ProductTable Data="filteredProducts" />
         {open && <Alert />}

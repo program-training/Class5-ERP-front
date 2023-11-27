@@ -21,8 +21,8 @@ const ProductDetails = () => {
   return (
     <Box>
       <Dialog
-        scroll={"paper"}
         fullScreen
+        scroll={"paper"}
         open={openProductPage}
         onClose={() => dispatch(setOpenPageProducts(false))}
       >
@@ -31,20 +31,20 @@ const ProductDetails = () => {
           setOpenUpdate={setOpenUpdate}
           product={chosenProduct}
         />
-        <Box sx={{ display: "flex", margin: 1 }}>
+        <Box sx={{ display: "flex", margin: 1, maxWidth: "100%" }}>
           <Details product={chosenProduct} />
           <Box
             sx={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              height: "100%",
+              maxWidth: "50%",
             }}
           >
             <img
               src={chosenProduct.imageUrl}
               alt={chosenProduct.imageAlt}
-              width="100%"
+              style={{ maxWidth: "100%" }}
             />
           </Box>
         </Box>
