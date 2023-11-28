@@ -8,6 +8,8 @@ interface InitialState {
     filteredProducts: adminProductInterface[];
     chosenProduct: adminProductInterface | null;
     openProductPage: boolean;
+    userProducts: adminProductInterface[];
+    openUserProducts: boolean;
   };
 }
 
@@ -17,6 +19,8 @@ const initialState: InitialState = {
     filteredProducts: [],
     chosenProduct: null,
     openProductPage: false,
+    userProducts: [],
+    openUserProducts: false,
   },
 };
 
@@ -43,6 +47,17 @@ export const inventorySlice = createSlice({
       state.inventoryProducts.openProductPage = action.payload;
       return state;
     },
+    setUserProducts: (
+      state,
+      action: PayloadAction<adminProductInterface[]>
+    ) => {
+      state.inventoryProducts.userProducts = action.payload;
+      return state;
+    },
+    setOpenUserProducts: (state, action: PayloadAction<boolean>) => {
+      state.inventoryProducts.openUserProducts = action.payload;
+      return state;
+    },
   },
 });
 
@@ -51,6 +66,8 @@ export const {
   setFilteredProducts,
   setChosenProduct,
   setOpenPageProducts,
+  setUserProducts,
+  setOpenUserProducts,
 } = inventorySlice.actions;
 
 export default inventorySlice.reducer;

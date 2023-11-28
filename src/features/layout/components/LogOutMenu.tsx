@@ -2,6 +2,7 @@ import { Menu, MenuItem } from "@mui/material";
 import { useAppDispatch } from "../../../redux/hooks";
 import { setUser } from "../../users/userSlice";
 import { Dispatch, SetStateAction } from "react";
+import UserProductsButton from "../../inventory/userInventory/components/UserProductsButton";
 
 type Props = {
   anchorEl: HTMLElement | null;
@@ -37,6 +38,9 @@ const LogOutMenu = ({ anchorEl, setAnchorEl, userName }: Props) => {
     >
       <MenuItem onClick={handleClose}>{userName}</MenuItem>
       <MenuItem onClick={handleClick}>Logout</MenuItem>
+      <MenuItem onClick={handleClose}>
+        <UserProductsButton />
+      </MenuItem>
     </Menu>
   );
 };
