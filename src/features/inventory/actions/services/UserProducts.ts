@@ -1,6 +1,7 @@
 import axios from "axios";
+const serverBaseURL = import.meta.env.VITE_BASE_URL;
 
-const URL = "http://localhost:3000/api/inventory/products";
+const URL = `${serverBaseURL}/api/inventory/products`;
 
 const getUserProductsFromServer = async () => {
   try {
