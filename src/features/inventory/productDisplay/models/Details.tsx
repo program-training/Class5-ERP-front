@@ -14,7 +14,7 @@ const Details = ({ product }: Props) => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "start",
-        width: "500px",
+        maxWidth: "50%",
       }}
     >
       <Item item="name:" value={product.name} divider="top" />

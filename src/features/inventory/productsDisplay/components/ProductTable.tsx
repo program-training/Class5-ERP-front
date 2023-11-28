@@ -4,14 +4,19 @@ import Paper from "@mui/material/Paper";
 import ProductDetails from "../../productDisplay/components/ProductDetails";
 import TableHeadModel from "../models/TableHead";
 import TableBodyModel from "../models/TableBody";
+import UserProductsPage from "../models/UserInventoryPageModel";
+export interface ProductsProps {
+  Data: string;
+}
 
-const ProductTable = () => {
+const ProductTable = ({ Data }: ProductsProps) => {
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }}>
+      <TableContainer component={Paper} sx={{ maxWidth: "100%" }}>
+        <Table sx={{ minWidth: "100%" }}>
           <TableHeadModel viewImage={true} />
-          <TableBodyModel />
+          {Data === "filteredProducts" && <TableBodyModel />}
+          {Data === "UserProducts" && <UserProductsPage />}
         </Table>
       </TableContainer>
       <ProductDetails />
