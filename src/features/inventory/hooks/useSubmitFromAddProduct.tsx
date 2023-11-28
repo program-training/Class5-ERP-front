@@ -1,6 +1,6 @@
-import { useAppDispatch } from "../../../../redux/hooks";
-import { setAlert } from "../../alert/utils/alertSlices";
-import { adminProductInterface } from "../../interfaces/adminProductInterface";
+import { useAppDispatch } from "../../../redux/hooks";
+import { setAlert } from "../alert/utils/alertSlices";
+import { adminProductInterface } from "../interfaces/adminProductInterface";
 import useActionOnRedux from "./useActionOnRedux";
 import addProduct from "../services/addProduct";
 

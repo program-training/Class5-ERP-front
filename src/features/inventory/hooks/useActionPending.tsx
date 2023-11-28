@@ -1,5 +1,5 @@
-import { useAppDispatch } from "../../../../redux/hooks";
-import { setAlert } from "../../alert/utils/alertSlices";
+import { useAppDispatch } from "../../../redux/hooks";
+import { setAlert } from "../alert/utils/alertSlices";
 
 const useActionPending = () => {
   const dispatch = useAppDispatch();

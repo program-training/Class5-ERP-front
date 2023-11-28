@@ -4,8 +4,8 @@ import EditNoteIcon from "@mui/icons-material/EditNote";
 import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import { Dispatch } from "react";
 import { useAppSelector } from "../../../../redux/hooks";
-import useSubmitFromDeleteProduct from "../../actions/hooks/useSubmitFromDeleteProduct";
-import useActionPending from "../../actions/hooks/useActionPending";
+import useSubmitFromDeleteProduct from "../../hooks/useSubmitFromDeleteProduct";
+import useActionPending from "../../hooks/useActionPending";
 
 interface Props {
   setOpenUpdate: Dispatch<React.SetStateAction<boolean>>;

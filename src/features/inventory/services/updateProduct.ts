@@ -1,5 +1,5 @@
 import axios from "axios";
-import { adminProductInterface } from "../../interfaces/adminProductInterface";
+import { adminProductInterface } from "../interfaces/adminProductInterface";
 
 const URL = "http://localhost:3000/api/inventory";
 
