@@ -8,19 +8,16 @@ import {
   setAllProducts,
   setFilteredProducts,
 } from "../productsDisplay/utils/inventorySlice";
-import { To, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import ROUTES from "../../../routes/RoutesModel";
 import getProductsFromServer from "../actions/services/getProducts";
 import Alert from "../alert/component/Alert";
 import ButtonToTop from "../productsDisplay/components/ButtonToTop";
 import ButtonAddProduct from "../productsDisplay/components/ButtonAddProduct";
-import UserProductsButton from "../userInventory/components/UserProductsButton";
 import UserProducts from "../userInventory/components/UserInventoryPage";
 import { S1, S2 } from "./style/PageStyle";
 
 const InventoryPage = () => {
-  const navigate = useNavigate();
-  const navigateTo = (to: To) => navigate(to);
   const dispatch = useAppDispatch();
 
   const { open } = useAppSelector((store) => store.alert);
@@ -36,10 +33,10 @@ const InventoryPage = () => {
     }
   }, [user]);
   // if (!user)  return <Navigate replace  to={ROUTES.login_page}/>
+
   return (
     <Box sx={S1}>
       <Box sx={S2}>
-        <UserProductsButton />
         <OverallInventoryTable />
       </Box>
       <Box sx={S2}>
