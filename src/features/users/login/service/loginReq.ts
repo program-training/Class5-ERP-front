@@ -1,6 +1,8 @@
 import axios from "axios";
 import { UserInterface } from "../../interface/userInterface";
-const URL = "http://localhost:3000/api/users/login";
+const serverBaseURL = import.meta.env.VITE_BASE_URL;
+
+const URL = `${serverBaseURL}/api/users/login`;
 
 const loginReq = async (user: UserInterface) => {
   try {
