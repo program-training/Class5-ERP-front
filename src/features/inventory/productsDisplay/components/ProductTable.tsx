@@ -12,7 +12,7 @@ export interface ProductsProps {
 const ProductTable = ({ Data }: ProductsProps) => {
   return (
     <>
-      <TableContainer component={Paper} sx={{ maxWidth: "100%" }}>
+      <TableContainer component={Paper} sx={{ minWidth: "100%" }}>
         <Table sx={{ minWidth: "100%" }}>
           <TableHeadModel viewImage={true} />
           {Data === "filteredProducts" && <TableBodyModel />}

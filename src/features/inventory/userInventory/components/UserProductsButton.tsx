@@ -5,10 +5,7 @@ import { setOpenUserProducts } from "../../productsDisplay/utils/inventorySlice"
 const UserProductsButton = () => {
   const dispatch = useAppDispatch();
   return (
-    <Button
-      variant="contained"
-      onClick={() => dispatch(setOpenUserProducts(true))}
-    >
+    <Button onClick={() => dispatch(setOpenUserProducts(true))}>
       my products
     </Button>
   );

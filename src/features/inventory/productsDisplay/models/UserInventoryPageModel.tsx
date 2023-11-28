@@ -5,13 +5,16 @@ import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { setChosenProduct, setUserProducts } from "../utils/inventorySlice";
 import { setOpenPageProducts } from "../utils/inventorySlice";
 import getUserProductsFromServer from "../../actions/services/UserProducts";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const UserProductsPage = () => {
   const dispatch = useAppDispatch();
+  const [error, setError] = useState<string>();
 
   useEffect(() => {
-    getUserProductsFromServer().then((res) => dispatch(setUserProducts(res)));
+    getUserProductsFromServer()
+      .then((res) => dispatch(setUserProducts(res)))
+      .catch((res) => setError(res));
   }, []);
 
   const { userProducts } = useAppSelector(
@@ -70,6 +73,7 @@ const UserProductsPage = () => {
           </StyledTableCell>
         </StyledTableRow>
       ))}
+      {error && <h2 style={{ color: "red" }}>{error}</h2>}
     </TableBody>
   );
 };
