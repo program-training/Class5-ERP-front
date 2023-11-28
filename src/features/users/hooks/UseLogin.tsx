@@ -4,9 +4,10 @@ import axios from "axios";
 import { To, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../redux/hooks";
 import { setUser } from "../userSlice";
+const serverBaseURL = import.meta.env.VITE_BASE_URL;
 
 const useLogin = (user: UserInterface) => {
-  const URL = "http://localhost:3000/api/users/login";
+  const URL = `${serverBaseURL}/api/users/login`;
   const navigate = useNavigate();
   const navigateTo = (to: To) => navigate(to);
   const [error, setError] = useState<string | null>(null);
