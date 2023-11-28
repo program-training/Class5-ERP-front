@@ -1,10 +1,10 @@
-import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import { adminProductInterface } from "../../interfaces/adminProductInterface";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { adminProductInterface } from "../interfaces/adminProductInterface";
 import {
   setAllProducts,
   setChosenProduct,
   setFilteredProducts,
-} from "../../productsDisplay/utils/inventorySlice";
+} from "../productsDisplay/utils/inventorySlice";
 
 const useActionOnRedux = () => {
   const dispatch = useAppDispatch();

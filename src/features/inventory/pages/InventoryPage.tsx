@@ -10,7 +10,7 @@ import {
 } from "../productsDisplay/utils/inventorySlice";
 import { To, useNavigate } from "react-router-dom";
 import ROUTES from "../../../routes/RoutesModel";
-import getProductsFromServer from "../actions/services/getProducts";
+import getProductsFromServer from "../services/getProducts";
 import Alert from "../alert/component/Alert";
 import ButtonToTop from "../productsDisplay/components/ButtonToTop";
 import ButtonAddProduct from "../productsDisplay/components/ButtonAddProduct";

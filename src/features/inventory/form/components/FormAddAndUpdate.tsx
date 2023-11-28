@@ -2,13 +2,13 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import { adminProductInterface } from "../../interfaces/adminProductInterface";
 import { useForm } from "react-hook-form";
-import HolderForm from "../models/HolderForm";
+import HolderForm from "./HolderForm";
 import { Dispatch } from "react";
-import Buttons from "../models/Buttons";
+import Buttons from "./Buttons";
 import Alert from "../../alert/component/Alert";
-import useSubmitFromAddProduct from "../../actions/hooks/useSubmitFromAddProduct";
-import useSubmitFromUpdateProduct from "../../actions/hooks/useSubmitFromUpdateProduct";
-import useActionPending from "../../actions/hooks/useActionPending";
+import useSubmitFromAddProduct from "../../hooks/useSubmitFromAddProduct";
+import useSubmitFromUpdateProduct from "../../hooks/useSubmitFromUpdateProduct";
+import useActionPending from "../../hooks/useActionPending";
 import { useAppSelector } from "../../../../redux/hooks";
 
 type Props = {
