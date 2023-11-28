@@ -1,4 +1,5 @@
 import axios from "axios";
+
 const serverBaseURL = import.meta.env.VITE_BASE_URL;
 
 const URL = `${serverBaseURL}/api/inventory/products`;
