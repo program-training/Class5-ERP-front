@@ -4,7 +4,7 @@ import {
   setOpenUserProducts,
   setUserProducts,
 } from "../../productsDisplay/utils/inventorySlice";
-import getUserProductsFromServer from "../../actions/services/UserProducts";
+import getUserProductsFromServer from "../../services/UserProducts";
 import { useEffect } from "react";
 import { setAlert } from "../../alert/utils/alertSlices";
 
