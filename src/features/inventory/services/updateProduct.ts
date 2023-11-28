@@ -1,7 +1,8 @@
 import axios from "axios";
 import { adminProductInterface } from "../interfaces/adminProductInterface";
+const serverBaseURL = import.meta.env.VITE_BASE_URL;
 
-const URL = "http://localhost:3000/api/inventory";
+const URL = `${serverBaseURL}/api/inventory`;
 
 const updateProduct = async (
   newProduct: adminProductInterface,
