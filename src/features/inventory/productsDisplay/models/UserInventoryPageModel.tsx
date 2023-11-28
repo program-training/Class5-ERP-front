@@ -2,20 +2,11 @@ import { TableBody } from "@mui/material";
 import { StyledTableCell } from "../styles/styleLabelCell";
 import { StyledTableRow } from "../styles/styleLabelRow";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import { setChosenProduct, setUserProducts } from "../utils/inventorySlice";
+import { setChosenProduct } from "../utils/inventorySlice";
 import { setOpenPageProducts } from "../utils/inventorySlice";
-import getUserProductsFromServer from "../../services/UserProducts";
-import { useEffect, useState } from "react";
 
 const UserProductsPage = () => {
   const dispatch = useAppDispatch();
-  const [error, setError] = useState<string>();
-
-  useEffect(() => {
-    getUserProductsFromServer()
-      .then((res) => dispatch(setUserProducts(res)))
-      .catch((res) => setError(res));
-  }, []);
 
   const { userProducts } = useAppSelector(
     (store) => store.inventory.inventoryProducts
@@ -73,7 +64,6 @@ const UserProductsPage = () => {
           </StyledTableCell>
         </StyledTableRow>
       ))}
-      {error && <h2 style={{ color: "red" }}>{error}</h2>}
     </TableBody>
   );
 };

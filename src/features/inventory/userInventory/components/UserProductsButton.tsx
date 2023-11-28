@@ -1,13 +1,38 @@
 import { Button } from "@mui/material";
-import { useAppDispatch } from "../../../../redux/hooks";
-import { setOpenUserProducts } from "../../productsDisplay/utils/inventorySlice";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import {
+  setOpenUserProducts,
+  setUserProducts,
+} from "../../productsDisplay/utils/inventorySlice";
+import getUserProductsFromServer from "../../services/UserProducts";
+import { useEffect } from "react";
+import { setAlert } from "../../alert/utils/alertSlices";
 
 const UserProductsButton = () => {
   const dispatch = useAppDispatch();
-  return (
-    <Button onClick={() => dispatch(setOpenUserProducts(true))}>
-      my products
-    </Button>
+  const { userProducts, allProducts } = useAppSelector(
+    (state) => state.inventory.inventoryProducts
   );
+
+  useEffect(() => {
+    getUserProductsFromServer().then((res) => dispatch(setUserProducts(res)));
+  }, [allProducts]);
+
+  const handelClick = () => {
+    if (typeof userProducts !== "string") {
+      dispatch(setOpenUserProducts(true));
+    } else {
+      dispatch(
+        setAlert({
+          open: true,
+          title: "error",
+          message: userProducts,
+          allowAccessProductPage: false,
+        })
+      );
+    }
+  };
+
+  return <Button onClick={handelClick}>my products</Button>;
 };
 export default UserProductsButton;

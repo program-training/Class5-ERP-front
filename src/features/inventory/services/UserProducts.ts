@@ -12,12 +12,7 @@ const getUserProductsFromServer = async () => {
     });
     return await response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.log(error.status);
-      console.error(error.response);
-    } else {
-      console.error("אין לך מוצרים פה יא אהבל");
-    }
+    return "אין לך פה מוצרים יא אהבל";
   }
 };
 
