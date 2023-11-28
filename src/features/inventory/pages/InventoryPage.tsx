@@ -24,7 +24,7 @@ const InventoryPage = () => {
   const user = useAppSelector((store) => store.user.user);
 
   useEffect(() => {
-    if (user === null) navigateTo(ROUTES.login_page);
+    if (!user) return;
     else {
       getProductsFromServer().then((res) => {
         dispatch(setAllProducts(res));
@@ -32,7 +32,7 @@ const InventoryPage = () => {
       });
     }
   }, [user]);
-  // if (!user)  return <Navigate replace  to={ROUTES.login_page}/>
+  if (!user) return <Navigate replace to={ROUTES.login_page} />;
 
   return (
     <Box sx={S1}>
