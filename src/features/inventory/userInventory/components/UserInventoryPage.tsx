@@ -12,18 +12,18 @@ export default function UserProducts() {
   const open = useAppSelector(
     (store) => store.inventory.inventoryProducts.openUserProducts
   );
+  const userEmail = useAppSelector((state) => state.user.user);
   const dispatch = useAppDispatch();
 
   return (
     <React.Fragment>
       <Dialog
-        // maxWidth="xl"
         open={open}
         fullWidth
         onClose={() => dispatch(setOpenUserProducts(false))}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{`hello ${"name"}, here is your products`}</DialogTitle>
+        <DialogTitle>{`hello ${userEmail}, here is your products`}</DialogTitle>
         <DialogContent>
           <ProductTable Data="UserProducts" />
         </DialogContent>
