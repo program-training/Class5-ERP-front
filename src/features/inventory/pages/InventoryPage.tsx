@@ -35,7 +35,7 @@ const InventoryPage = () => {
       });
     }
   }, [user]);
-
+  // if (!user)  return <Navigate replace  to={ROUTES.login_page}/>
   return (
     <Box sx={S1}>
       <Box sx={S2}>

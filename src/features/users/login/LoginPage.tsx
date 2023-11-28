@@ -1,13 +1,9 @@
-import TextField from "@mui/material/TextField";
 import { useForm } from "react-hook-form";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import { S1, S2 } from "./components/Style";
 import { inputs } from "./components/Validation";
 import { ErrorMessage } from "@hookform/error-message";
-import Typography from "@mui/material/Typography";
 import { Password_validation, Email_validation } from "./components/Validation";
-import { Grid } from "@mui/material";
+import { Grid, Box, Typography, Container, TextField } from "@mui/material";
 import BottomLinks from "./components/BottomLinks";
 import { SubButton } from "./components/SubButton";
 import { TopPage } from "./components/TopPage";

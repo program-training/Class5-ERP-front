@@ -17,8 +17,9 @@ export default function UserProducts() {
   return (
     <React.Fragment>
       <Dialog
-        maxWidth="xl"
+        // maxWidth="xl"
         open={open}
+        fullWidth
         onClose={() => dispatch(setOpenUserProducts(false))}
         aria-describedby="alert-dialog-slide-description"
       >
