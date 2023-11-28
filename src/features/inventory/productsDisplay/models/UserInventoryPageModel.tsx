@@ -4,7 +4,7 @@ import { StyledTableRow } from "../styles/styleLabelRow";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { setChosenProduct, setUserProducts } from "../utils/inventorySlice";
 import { setOpenPageProducts } from "../utils/inventorySlice";
-import getUserProductsFromServer from "../../actions/services/UserProducts";
+import getUserProductsFromServer from "../../services/UserProducts";
 import { useEffect, useState } from "react";
 
 const UserProductsPage = () => {
