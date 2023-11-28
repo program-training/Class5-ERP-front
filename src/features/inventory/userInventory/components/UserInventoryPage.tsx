@@ -1,4 +1,4 @@
-import * as React from "react";
+// import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -12,27 +12,38 @@ export default function UserProducts() {
   const open = useAppSelector(
     (store) => store.inventory.inventoryProducts.openUserProducts
   );
-  const userEmail = useAppSelector((state) => state.user.user);
+  const userEmail = useAppSelector((state) => state.user.user)?.split("@")[0];
   const dispatch = useAppDispatch();
 
   return (
-    <React.Fragment>
-      <Dialog
-        open={open}
-        fullWidth
-        onClose={() => dispatch(setOpenUserProducts(false))}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle>{`hello ${userEmail}, here is your products`}</DialogTitle>
-        <DialogContent>
-          <ProductTable Data="UserProducts" />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => dispatch(setOpenUserProducts(false))}>
-            close
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </React.Fragment>
+    <Dialog
+      open={open}
+      sx={{
+        maxWidth: "50%",
+        position: "fixed",
+        left: "25%",
+        top: "5%",
+        maxHeight: "60%",
+      }}
+      fullScreen
+      onClose={() => dispatch(setOpenUserProducts(false))}
+    >
+      <DialogTitle
+        sx={{
+          width: "100%",
+          textAlign: "center",
+          fontWeight: "bolder",
+          color: "Highlight",
+        }}
+      >{`hello ${userEmail}, here is your products`}</DialogTitle>
+      <DialogContent sx={{ width: "100%" }}>
+        <ProductTable Data="UserProducts" />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={() => dispatch(setOpenUserProducts(false))}>
+          close
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 }

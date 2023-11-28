@@ -18,20 +18,48 @@ const Alert = () => {
   );
   const dispatch = useAppDispatch();
   const color = title === "error" ? "error" : "primary";
+  const BorderColor = title === "error" ? "red" : "blue";
   const styleAlert = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-around",
+    // border: `3px solid ${BorderColor}`,
   };
   return (
     <Box>
-      <Dialog open={open} maxWidth="lg">
-        <DialogTitle sx={styleAlert} color={color}>
-          {title}
+      <Dialog
+        open={open}
+        sx={{
+          maxWidth: "40%",
+          maxHeight: "42%",
+          position: "fixed",
+          top: "8%",
+          left: "30%",
+          border: `3px solid ${BorderColor}`,
+        }}
+        fullScreen
+      >
+        <DialogTitle
+          sx={{
+            textAlign: "center",
+            fontSize: "250%",
+            fontFamily: "serif",
+          }}
+          color={color}
+        >
+          {title} !
         </DialogTitle>
         <DialogContent sx={styleAlert}>
-          <DialogContentText>{message}</DialogContentText>
+          <DialogContentText
+            sx={{
+              textAlign: "center",
+              fontSize: "200%",
+            }}
+            color={color}
+          >
+            {message}
+          </DialogContentText>
           {message === "loads the request" && <CircularProgress />}
         </DialogContent>
         <DialogActions
@@ -47,7 +75,7 @@ const Alert = () => {
                 dispatch(setAlert({ open: false }));
                 dispatch(setOpenPageProducts(true));
               }}
-              color={color}
+              color={"success"}
             >
               product page
             </Button>

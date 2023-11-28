@@ -15,10 +15,10 @@ const ButtonToTop = () => {
       color="primary"
       sx={{
         position: "fixed",
-        left: "1185px",
-        bottom: "20px",
-        height: "45px",
-        width: "45px",
+        right: "2%",
+        bottom: "3%",
+        height: "7%",
+        width: "5%",
       }}
     >
       <NavigationIcon />
