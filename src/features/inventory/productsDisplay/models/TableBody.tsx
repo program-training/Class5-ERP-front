@@ -5,10 +5,6 @@ import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { setChosenProduct } from "../utils/inventorySlice";
 import { setOpenPageProducts } from "../utils/inventorySlice";
 
-export interface ProductsProps {
-  name: string;
-}
-
 const TableBodyModel = () => {
   const dispatch = useAppDispatch();
   const { filteredProducts } = useAppSelector(

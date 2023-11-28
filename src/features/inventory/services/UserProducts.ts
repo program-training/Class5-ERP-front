@@ -1,6 +1,7 @@
 import axios from "axios";
+const serverBaseURL = import.meta.env.VITE_BASE_URL;
 
-const URL = "http://localhost:3000/api/inventory/products";
+const URL = `${serverBaseURL}/api/inventory/products`;
 
 const getUserProductsFromServer = async () => {
   try {
@@ -10,7 +11,12 @@ const getUserProductsFromServer = async () => {
     });
     return await response.data;
   } catch (error) {
-    console.log(error);
+    if (axios.isAxiosError(error)) {
+      console.log(error.status);
+      console.error(error.response);
+    } else {
+      console.error("אין לך מוצרים פה יא אהבל");
+    }
   }
 };
 

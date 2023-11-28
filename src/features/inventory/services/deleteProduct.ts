@@ -1,6 +1,7 @@
 import axios from "axios";
+const serverBaseURL = import.meta.env.VITE_BASE_URL;
 
-const URL = "http://localhost:3000/api/inventory";
+const URL = `${serverBaseURL}/api/inventory`;
 
 const deleteProduct = async (id: string | number) => {
   const token = localStorage.getItem("TOKEN");
