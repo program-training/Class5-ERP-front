@@ -10,7 +10,12 @@ const getUserProductsFromServer = async () => {
     });
     return await response.data;
   } catch (error) {
-    console.log(error);
+    if (axios.isAxiosError(error)) {
+      console.log(error.status);
+      console.error(error.response);
+    } else {
+      console.error("אין לך מוצרים פה יא אהבל");
+    }
   }
 };
 
