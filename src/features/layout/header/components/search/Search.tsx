@@ -4,18 +4,19 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/ImageSearch";
 import { useState } from "react";
-// import { useAppDispatch, useAppSelector } from "../../../../../redux/hooks";
-// import { setFilteredProducts } from "../../../../inventory/productsDisplay/utils/inventorySlice";
-// import { searchUtil } from "../../util/search/searchUtil";
+import { useAppDispatch, useAppSelector } from "../../../../../redux/hooks";
+import { setFilteredProducts } from "../../../../inventory/productsDisplay/utils/inventorySlice";
+import { searchUtil } from "../../util/search/searchUtil";
+
 const Search = () => {
   const [value, setValue] = useState<string>("");
-  // const { allProducts } = useAppSelector(
-  //   (store) => store.inventory.inventoryProducts
-  // );
-  // const dispatch = useAppDispatch();
+  const { allProducts } = useAppSelector(
+    (store) => store.inventory.inventoryProducts
+  );
+  const dispatch = useAppDispatch();
   const handlerClick = () => {
-    //   dispatch(setFilteredProducts(allProducts));
-    //   dispatch(setFilteredProducts(searchUtil(allProducts, value)));
+    dispatch(setFilteredProducts(allProducts));
+    dispatch(setFilteredProducts(searchUtil(allProducts, value)));
   };
 
   return (
@@ -32,7 +33,7 @@ const Search = () => {
         placeholder="product, category, user added, supplier"
         value={value}
         onChange={(e) => setValue(`${e.target.value}`)}
-        // onKeyDown={(e) => e.key === "Enter" && handlerClick()}
+        onKeyDown={(e) => e.key === "Enter" && handlerClick()}
       />
       <IconButton type="button" sx={{ p: "10px" }} onClick={handlerClick}>
         <SearchIcon />
