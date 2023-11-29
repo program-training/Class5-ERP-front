@@ -13,7 +13,7 @@ const UserProductsPage = () => {
   );
 
   return (
-    <TableBody>
+    <TableBody style={{ minWidth: "100%" }}>
       {userProducts?.map((product, key) => (
         <StyledTableRow
           key={key}

@@ -13,10 +13,10 @@ const ButtonAddProduct = () => {
         color="primary"
         sx={{
           position: "fixed",
-          left: "1185px",
-          bottom: "80px",
-          height: "47px",
-          width: "47px",
+          right: "2%",
+          bottom: "13%",
+          height: "7%",
+          width: "5%",
         }}
       >
         <PlaylistAddIcon />
