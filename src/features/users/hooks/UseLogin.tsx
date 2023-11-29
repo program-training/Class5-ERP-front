@@ -4,6 +4,7 @@ import axios from "axios";
 import { To, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../redux/hooks";
 import { setUser } from "../userSlice";
+import ROUTES from "../../../routes/RoutesModel";
 const serverBaseURL = import.meta.env.VITE_BASE_URL;
 
 const useLogin = (user: UserInterface) => {
@@ -22,7 +23,7 @@ const useLogin = (user: UserInterface) => {
         localStorage.setItem("TOKEN", TOKEN);
         dispatch(setUser(user.email));
         setStatus(200);
-        navigateTo("/");
+        navigateTo(ROUTES.HOME);
       })
       .catch((error) => setError(error));
   });
