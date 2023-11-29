@@ -11,6 +11,7 @@ import {
 import { useAppSelector, useAppDispatch } from "../../../../redux/hooks";
 import { setAlert } from "../utils/alertSlices";
 import { setOpenPageProducts } from "../../productsDisplay/utils/inventorySlice";
+import { S1, S2, S3 } from "../style/AlertStyle";
 
 const Alert = () => {
   const { open, title, message, allowAccessProductPage } = useAppSelector(
@@ -40,35 +41,16 @@ const Alert = () => {
         }}
         fullScreen
       >
-        <DialogTitle
-          sx={{
-            textAlign: "center",
-            fontSize: "250%",
-            fontFamily: "serif",
-          }}
-          color={color}
-        >
+        <DialogTitle sx={S2} color={color}>
           {title} !
         </DialogTitle>
         <DialogContent sx={styleAlert}>
-          <DialogContentText
-            sx={{
-              textAlign: "center",
-              fontSize: "200%",
-            }}
-            color={color}
-          >
+          <DialogContentText sx={S1} color={color}>
             {message}
           </DialogContentText>
           {message === "loads the request" && <CircularProgress />}
         </DialogContent>
-        <DialogActions
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-around",
-          }}
-        >
+        <DialogActions sx={S3}>
           {allowAccessProductPage && (
             <Button
               onClick={() => {
