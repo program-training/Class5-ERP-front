@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1701254029353" clover="3.2.0">
-  <project timestamp="1701254029354" name="All files">
+<coverage generated="1701254104750" clover="3.2.0">
+  <project timestamp="1701254104753" name="All files">
     <metrics statements="344" coveredstatements="308" conditionals="18" coveredconditionals="18" methods="15" coveredmethods="4" elements="377" coveredelements="330" complexity="0" loc="344" ncloc="344" packages="8" files="9" classes="9"/>
     <package name="features.inventory.alert.utils">
       <metrics statements="30" coveredstatements="24" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
