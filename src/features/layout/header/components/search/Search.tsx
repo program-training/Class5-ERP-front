@@ -3,44 +3,35 @@ import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/ImageSearch";
-import { SetStateAction, useState } from "react";
-import { adminProductInterface } from "../../interfaces/adminProductInterface";
-import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import { setFilteredProducts } from "../utils/inventorySlice";
-
+import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../../../redux/hooks";
+import { setFilteredProducts } from "../../../../inventory/productsDisplay/utils/inventorySlice";
+import { searchUtil } from "../../util/search/searchUtil";
 const Search = () => {
-  const [value, setValue] = useState<SetStateAction<string>>("");
+  const [value, setValue] = useState<string>("");
   const { allProducts } = useAppSelector(
     (store) => store.inventory.inventoryProducts
   );
   const dispatch = useAppDispatch();
   const handlerClick = () => {
-    const helper: adminProductInterface[] = [];
-    const regex = new RegExp(`${value}`, `i`);
     dispatch(setFilteredProducts(allProducts));
-    allProducts.forEach((product) => {
-      if (
-        regex.test(product.name) ||
-        regex.test(product.category) ||
-        regex.test(product.createdBy) ||
-        regex.test(product.supplier)
-      )
-        helper.push(product);
-    });
-
-    dispatch(setFilteredProducts(helper));
+    dispatch(setFilteredProducts(searchUtil(allProducts, value)));
   };
 
   return (
     <Paper
-      component="form"
-      sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 400 }}
+      sx={{
+        display: "flex",
+        width: 500,
+        height: 45,
+      }}
     >
       <InputBase
         sx={{ ml: 2, flex: 1 }}
         placeholder="product, category, user added, supplier"
         value={value}
         onChange={(e) => setValue(`${e.target.value}`)}
+        onKeyDown={(e) => e.key === "Enter" && handlerClick()}
       />
       <IconButton type="button" sx={{ p: "10px" }} onClick={handlerClick}>
         <SearchIcon />
