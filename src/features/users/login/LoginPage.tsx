@@ -12,6 +12,7 @@ import { To, useNavigate } from "react-router-dom";
 import loginReq from "./service/loginReq";
 import { setAlert } from "../../inventory/alert/utils/alertSlices";
 import Alert from "../../inventory/alert/component/Alert";
+import ROUTES from "../../../routes/RoutesModel";
 
 const LogIn = () => {
   const dispatch = useAppDispatch();
@@ -27,7 +28,7 @@ const LogIn = () => {
     loginReq(data)
       .then(() => {
         dispatch(setUser(data.email));
-        navigateTo("/");
+        navigateTo(ROUTES.HOME);
       })
       .catch((error) =>
         dispatch(setAlert({ open: true, message: error.message }))
