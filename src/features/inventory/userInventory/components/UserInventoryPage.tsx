@@ -7,6 +7,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { setOpenUserProducts } from "../../productsDisplay/utils/inventorySlice";
 import ProductTable from "../../productsDisplay/components/ProductTable";
+import { ui1, ui2 } from "../style/UserInventoryStyle";
 
 export default function UserProducts() {
   const open = useAppSelector(
@@ -18,23 +19,12 @@ export default function UserProducts() {
   return (
     <Dialog
       open={open}
-      sx={{
-        maxWidth: "50%",
-        position: "fixed",
-        left: "25%",
-        top: "5%",
-        maxHeight: "60%",
-      }}
+      sx={ui1}
       fullScreen
       onClose={() => dispatch(setOpenUserProducts(false))}
     >
       <DialogTitle
-        sx={{
-          width: "100%",
-          textAlign: "center",
-          fontWeight: "bolder",
-          color: "Highlight",
-        }}
+        sx={ui2}
       >{`hello ${userEmail}, here is your products`}</DialogTitle>
       <DialogContent sx={{ width: "100%" }}>
         <ProductTable Data="UserProducts" />
