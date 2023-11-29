@@ -32,7 +32,7 @@ const SignUp = () => {
     const { password, email } = data;
     const userToSend = { email, password };
     signUpReq(userToSend)
-      .then(() => navigateTo("/"))
+      .then(() => navigateTo("/login"))
       .catch((error) =>
         dispatch(setAlert({ open: true, message: error.message }))
       );
