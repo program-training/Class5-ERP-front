@@ -84,27 +84,35 @@ describe("search util", () => {
   });
   test("Returns an empty array if the value argument is not an string", () => {
     const products = [product1];
-    const value = 44;
+    const value = 44 as unknown as string;
     const filteredProducts: adminProductInterface[] = [];
     const result = searchUtil(products, value);
     expect(result).toEqual(filteredProducts);
   });
   test("Returns an empty array if the allProducts argument is not an array", () => {
-    const products = "string";
+    const products = "string" as unknown as adminProductInterface[];
     const value = "TEST";
     const filteredProducts: adminProductInterface[] = [];
     const result = searchUtil(products, value);
     expect(result).toEqual(filteredProducts);
   });
   test("Returns an empty array if the allProducts argument is an array and contains no product objects", () => {
-    const products = [product2, "string", product1];
+    const products = [
+      product2,
+      "string",
+      product1,
+    ] as unknown as adminProductInterface[];
     const value = "TEST";
     const filteredProducts: adminProductInterface[] = [];
     const result = searchUtil(products, value);
     expect(result).toEqual(filteredProducts);
   });
   test("Returns an empty array if the allProducts argument is an array and contains no product objects", () => {
-    const products = [product2, ["string"], product1];
+    const products = [
+      product2,
+      ["string"],
+      product1,
+    ] as unknown as adminProductInterface[];
     const value = "TEST";
     const filteredProducts: adminProductInterface[] = [];
     const result = searchUtil(products, value);
