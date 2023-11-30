@@ -1,7 +1,7 @@
 import axios from "axios";
 const serverBaseURL = import.meta.env.VITE_BASE_URL;
 
-const URL = `${serverBaseURL}/api/inventory`;
+const URL = `${serverBaseURL}/inventory`;
 
 const getProductsFromServer = async () => {
   const token = localStorage.getItem("ERP_TOKEN");

@@ -8,7 +8,7 @@ import ROUTES from "../../../routes/RoutesModel";
 const serverBaseURL = import.meta.env.VITE_BASE_URL;
 
 const useLogin = (user: UserInterface) => {
-  const URL = `${serverBaseURL}/api/users/login`;
+  const URL = `${serverBaseURL}/users/login`;
   const navigate = useNavigate();
   const navigateTo = (to: To) => navigate(to);
   const [error, setError] = useState<string | null>(null);

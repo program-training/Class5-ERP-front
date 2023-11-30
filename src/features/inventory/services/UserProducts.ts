@@ -2,7 +2,7 @@ import axios from "axios";
 
 const serverBaseURL = import.meta.env.VITE_BASE_URL;
 
-const URL = `${serverBaseURL}/api/inventory/products`;
+const URL = `${serverBaseURL}/inventory/products`;
 
 const getUserProductsFromServer = async () => {
   try {
