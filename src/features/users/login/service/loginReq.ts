@@ -9,8 +9,8 @@ const loginReq = async (user: UserInterface) => {
     const response = await axios.post(URL, user);
     const TOKEN = response.data.resData.token;
 
-    localStorage.setItem("TOKEN", TOKEN);
-    localStorage.setItem("username", user.email);
+    localStorage.setItem("ERP_TOKEN", TOKEN);
+    localStorage.setItem("erpUsername", user.email);
     return response.status;
   } catch (error) {
     return Promise.reject(error);
