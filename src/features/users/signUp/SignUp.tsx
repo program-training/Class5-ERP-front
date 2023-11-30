@@ -18,6 +18,7 @@ import { To, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../redux/hooks";
 import { setAlert } from "../../inventory/alert/utils/alertSlices";
 import Alert from "../../inventory/alert/component/Alert";
+import ROUTES from "../../../routes/RoutesModel";
 
 const SignUp = () => {
   const {
@@ -32,7 +33,7 @@ const SignUp = () => {
     const { password, email } = data;
     const userToSend = { email, password };
     signUpReq(userToSend)
-      .then(() => navigateTo("/"))
+      .then(() => navigateTo(ROUTES.login_page))
       .catch((error) =>
         dispatch(setAlert({ open: true, message: error.message }))
       );

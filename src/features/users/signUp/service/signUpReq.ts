@@ -1,14 +1,13 @@
 import axios from "axios";
 import { UserInterface } from "../../interface/userInterface";
-import loginReq from "../../login/service/loginReq";
+const serverBaseURL = import.meta.env.VITE_BASE_URL;
 
-const URL = "http://localhost:3000/api/users/signup";
+const URL = `${serverBaseURL}/api/users/signup`;
 
 const signUpReq = async (user: UserInterface) => {
   try {
-    await axios.post(URL, user);
-    const login = await loginReq(user);
-    return login;
+    const userData = (await axios.post(URL, user)).data;
+    return userData;
   } catch (error) {
     return Promise.reject(error);
   }
