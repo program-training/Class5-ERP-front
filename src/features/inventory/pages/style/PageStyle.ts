@@ -7,6 +7,7 @@ export const S1: SxProps = {
   maxWidth: "xxl",
 };
 export const S2: SxProps = {
+  marginTop: "5px",
   minWidth: "100%",
   display: "flex",
   flexDirection: "column",
