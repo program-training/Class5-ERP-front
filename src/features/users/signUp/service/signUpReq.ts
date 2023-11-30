@@ -2,7 +2,7 @@ import axios from "axios";
 import { UserInterface } from "../../interface/userInterface";
 const serverBaseURL = import.meta.env.VITE_BASE_URL;
 
-const URL = `${serverBaseURL}/api/users/signup`;
+const URL = `${serverBaseURL}/users/signup`;
 
 const signUpReq = async (user: UserInterface) => {
   try {

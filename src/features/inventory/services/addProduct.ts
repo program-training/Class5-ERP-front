@@ -3,7 +3,7 @@ import { adminProductInterface } from "../interfaces/adminProductInterface";
 const serverBaseURL = import.meta.env.VITE_BASE_URL;
 
 
-const URL = `${serverBaseURL}/api/inventory`;
+const URL = `${serverBaseURL}/inventory`;
 
 const addProduct = async (newProduct: adminProductInterface) => {
   const token = localStorage.getItem("ERP_TOKEN");
