@@ -1,13 +1,12 @@
-// import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import { setOpenUserProducts } from "../../productsDisplay/utils/inventorySlice";
-import ProductTable from "../../productsDisplay/components/ProductTable";
-import { ui1, ui2 } from "../style/UserInventoryStyle";
+import { useAppDispatch, useAppSelector } from "../../../../../redux/hooks";
+import { setOpenUserProducts } from "../../../productsDisplay/utils/inventorySlice";
+import ProductTable from "../../../productsDisplay/components/ProductTable";
+import { ui1, ui2 } from "../../style/UserInventoryStyle";
 
 export default function UserProducts() {
   const open = useAppSelector(
@@ -18,6 +17,7 @@ export default function UserProducts() {
 
   return (
     <Dialog
+      data-testid="User_inventory_dialog"
       open={open}
       sx={ui1}
       fullScreen

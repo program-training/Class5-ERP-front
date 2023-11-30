@@ -6,7 +6,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  user: localStorage.getItem("username") || null,
+  user: localStorage.getItem("erpUsername") || null,
 };
 
 export const userSlice = createSlice({

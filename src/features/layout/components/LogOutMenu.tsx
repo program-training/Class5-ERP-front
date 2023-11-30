@@ -2,7 +2,7 @@ import { Menu, MenuItem } from "@mui/material";
 import { useAppDispatch } from "../../../redux/hooks";
 import { setUser } from "../../users/userSlice";
 import { Dispatch, SetStateAction } from "react";
-import UserProductsButton from "../../inventory/userInventory/components/UserProductsButton";
+import UserProductsButton from "../../inventory/userInventory/components/userProductsButton/UserProductsButton";
 
 type Props = {
   anchorEl: HTMLElement | null;
@@ -13,8 +13,8 @@ type Props = {
 const LogOutMenu = ({ anchorEl, setAnchorEl, userName }: Props) => {
   const dispatch = useAppDispatch();
   const handleClick = () => {
-    localStorage.removeItem("TOKEN");
-    localStorage.removeItem("username");
+    localStorage.removeItem("ERP_TOKEN");
+    localStorage.removeItem("erpUsername");
     dispatch(setUser(null));
     setAnchorEl(null);
   };

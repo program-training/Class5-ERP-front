@@ -14,7 +14,7 @@ import getProductsFromServer from "../services/getProducts";
 import Alert from "../alert/component/Alert";
 import ButtonToTop from "../productsDisplay/components/ButtonToTop";
 import ButtonAddProduct from "../productsDisplay/components/ButtonAddProduct";
-import UserProducts from "../userInventory/components/UserInventoryPage";
+import UserProducts from "../userInventory/components/userInventoryPage/UserInventoryPage";
 import { S1, S2 } from "./style/PageStyle";
 import MessagePendingOrError from "../productsDisplay/components/MessagePendingOrError";
 
