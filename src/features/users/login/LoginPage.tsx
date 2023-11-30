@@ -1,9 +1,8 @@
 import { useForm } from "react-hook-form";
-import { S1, S2 } from "./components/Style";
+import { S1 } from "./components/Style";
 import { inputs } from "./components/Validation";
-import { ErrorMessage } from "@hookform/error-message";
 import { Password_validation, Email_validation } from "./components/Validation";
-import { Grid, Box, Typography, Container, TextField } from "@mui/material";
+import { Grid, Box, Container, TextField } from "@mui/material";
 import BottomLinks from "./components/BottomLinks";
 import { SubButton } from "./components/SubButton";
 import { TopPage } from "./components/TopPage";
@@ -13,6 +12,7 @@ import { To, useNavigate } from "react-router-dom";
 import loginReq from "./service/loginReq";
 import { setAlert } from "../../inventory/alert/utils/alertSlices";
 import Alert from "../../inventory/alert/component/Alert";
+import ROUTES from "../../../routes/RoutesModel";
 
 const LogIn = () => {
   const dispatch = useAppDispatch();
@@ -28,7 +28,7 @@ const LogIn = () => {
     loginReq(data)
       .then(() => {
         dispatch(setUser(data.email));
-        navigateTo("/");
+        navigateTo(ROUTES.HOME);
       })
       .catch((error) =>
         dispatch(setAlert({ open: true, message: error.message }))
@@ -43,13 +43,15 @@ const LogIn = () => {
     >
       <Box sx={S1}>
         <TopPage />
-        <Box
+        <Grid
+          container
+          spacing={2}
           component="form"
           onSubmit={handleSubmit(onSubmit)}
           noValidate
           sx={{ mt: 1 }}
         >
-          <Grid>
+          <Grid item xs={12}>
             <TextField
               margin="normal"
               required
@@ -57,22 +59,12 @@ const LogIn = () => {
               label="Email"
               autoComplete="@gmail.com"
               autoFocus
+              helperText={errors.email?.message}
+              error={errors.email ? true : false}
               {...register("email", Email_validation)}
             />
-            <ErrorMessage
-              errors={errors}
-              name="email"
-              render={({ messages }) =>
-                messages &&
-                Object.entries(messages).map(([type, message]) => (
-                  <Typography sx={S2} key={type}>
-                    {message}
-                  </Typography>
-                ))
-              }
-            />
           </Grid>
-          <Grid>
+          <Grid item xs={12}>
             <TextField
               margin="normal"
               required
@@ -80,25 +72,15 @@ const LogIn = () => {
               label="Password"
               type="password"
               autoComplete="current-password"
+              helperText={errors.password?.message}
+              error={errors.password ? true : false}
               {...register("password", Password_validation)}
-            />
-            <ErrorMessage
-              errors={errors}
-              name="password"
-              render={({ messages }) =>
-                messages &&
-                Object.entries(messages).map(([type, message]) => (
-                  <Typography key={type} sx={S2}>
-                    {message}{" "}
-                  </Typography>
-                ))
-              }
             />
           </Grid>
 
           <BottomLinks />
           <SubButton isValid={isValid} />
-        </Box>
+        </Grid>
       </Box>
       <Alert />
     </Container>

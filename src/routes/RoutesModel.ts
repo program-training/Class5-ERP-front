@@ -1,7 +1,7 @@
 const ROUTES = {
-  HOME: "/",
-  login_page: "/login",
-  sign_up: "/signup",
+  HOME: "/erp",
+  login_page: "/erp/login",
+  sign_up: "/erp/signup",
   ERROR: "*",
 };
 
