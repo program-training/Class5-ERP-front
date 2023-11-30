@@ -6,7 +6,7 @@ const URL = `${serverBaseURL}/api/inventory/products`;
 
 const getUserProductsFromServer = async () => {
   try {
-    const token = localStorage.getItem("TOKEN");
+    const token = localStorage.getItem("ERP_TOKEN");
     const response = await axios.get(URL, {
       headers: { authorization: token },
     });

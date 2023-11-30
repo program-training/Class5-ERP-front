@@ -8,7 +8,7 @@ const updateProduct = async (
   newProduct: adminProductInterface,
   id: string | number
 ) => {
-  const token = localStorage.getItem("TOKEN");
+  const token = localStorage.getItem("ERP_TOKEN");
   const response = await axios.put(`${URL}/${id}`, newProduct, {
     headers: {
       authorization: token,

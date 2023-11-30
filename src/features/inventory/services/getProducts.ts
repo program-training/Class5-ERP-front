@@ -4,7 +4,7 @@ const serverBaseURL = import.meta.env.VITE_BASE_URL;
 const URL = `${serverBaseURL}/api/inventory`;
 
 const getProductsFromServer = async () => {
-  const token = localStorage.getItem("TOKEN");
+  const token = localStorage.getItem("ERP_TOKEN");
   const response = await axios.get(URL, {
     headers: { authorization: token },
   });

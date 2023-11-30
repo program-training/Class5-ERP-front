@@ -20,7 +20,7 @@ const useLogin = (user: UserInterface) => {
       .post(URL, user)
       .then((res) => {
         const TOKEN = res.data.resData.token;
-        localStorage.setItem("TOKEN", TOKEN);
+        localStorage.setItem("ERP_TOKEN", TOKEN);
         dispatch(setUser(user.email));
         setStatus(200);
         navigateTo(ROUTES.HOME);
