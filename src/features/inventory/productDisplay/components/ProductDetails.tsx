@@ -23,6 +23,7 @@ const ProductDetails = () => {
   const { openProductPage } = useAppSelector(
     (store) => store.inventory.inventoryProducts
   );
+
   const { data, loading, error } = useQuery(GET_CHANGE, {
     variables: { getProductStatisticsId: chosenProduct?.id },
   });
