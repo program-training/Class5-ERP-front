@@ -24,7 +24,7 @@ const ProductDetails = () => {
     (store) => store.inventory.inventoryProducts
   );
   const { data, loading, error } = useQuery(GET_CHANGE, {
-    variables: { getProductStatisticsId: chosenProduct?.id },
+    variables: { getProductStatisticsId: chosenProduct?.id || '11111111' },
   });
 
   const [openUpdate, setOpenUpdate] = useState(false);
