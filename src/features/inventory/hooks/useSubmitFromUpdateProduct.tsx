@@ -16,12 +16,15 @@ const useSubmitFromUpdateProduct = () => {
       variables: {
         input: {
           product: {...normalizeData(newProduct)},
-          id
+          id: `${id}`
         },
       }
     })
       .then(() => {
-        actionOnRedux("update", newProduct);
+        // dispatch(setChosenProduct({ ...newProduct, id: +id }))
+        console.log('new product:', newProduct);
+        
+        actionOnRedux("update", { ...newProduct, id: +id });
         dispatch(
           setAlert({
             open: true,
