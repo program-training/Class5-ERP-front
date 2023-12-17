@@ -27,7 +27,7 @@ const useActionOnRedux = () => {
     }
     action === "delete" &&
       builder.splice(
-        builder.findIndex((product) => product.id === chosenProduct?.id),
+        builder.findIndex((product) => `${product.id}` === `${chosenProduct?.id}`),
         1
       );
     if (action === "update" && newProduct) {
@@ -37,7 +37,7 @@ const useActionOnRedux = () => {
       ] = newProduct;
       console.log('updated builder', builder);
     }
-
+    
     newProduct && dispatch(setChosenProduct(newProduct));
     builder && dispatch(setAllProducts(builder));
     builder && dispatch(setFilteredProducts(builder));
