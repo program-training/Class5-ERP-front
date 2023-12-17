@@ -1,8 +1,8 @@
 name: ESLint Check
 
 on:
-  pull_request:
-    branches: [devop-pipeline, main]
+  push:
+    branches: ["*"]
     paths:
       - "**/*.ts"
       - "**/*.tsx"
