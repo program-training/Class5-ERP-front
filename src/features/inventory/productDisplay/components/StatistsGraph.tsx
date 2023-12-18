@@ -1,16 +1,14 @@
 import { LineChart } from "@mui/x-charts/LineChart";
 
 interface Props {
-  dates: number[];
   quantity: number[];
 }
-const StatistsGraph = ({ dates, quantity }: Props) => {
+const StatistsGraph = ({ quantity }: Props) => {
   return (
     <LineChart
-      xAxis={[{ data: dates }]} // תאריך
       series={[
         {
-          data: quantity, // כמות
+          data: quantity,
           area: true,
         },
       ]}

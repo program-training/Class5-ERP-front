@@ -1,6 +1,6 @@
 import Dialog from "@mui/material/Dialog";
 import { Box } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormAddAndUpdate from "../../form/components/FormAddAndUpdate";
 import AppBarModel from "../models/AppBar";
 import Details from "../models/Details";
@@ -24,14 +24,15 @@ const ProductDetails = () => {
     (store) => store.inventory.inventoryProducts
   );
 
-  const { data, loading, error } = useQuery(GET_CHANGE, {
-    variables: { getProductStatisticsId: `${chosenProduct?.id}` || "11111111" },
+  const { data, loading, error, refetch } = useQuery(GET_CHANGE, {
+    variables: { getProductStatisticsId: `${chosenProduct?.id}` || "1" },
   });
 
-  const [openUpdate, setOpenUpdate] = useState(false);
+  useEffect(() => {
+    refetch();
+  }, [chosenProduct]);
 
-  const dates: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-  // const dates: number[] = [];
+  const [openUpdate, setOpenUpdate] = useState(false);
   const quantity: number[] = [];
 
   if (!chosenProduct) return;
@@ -60,10 +61,9 @@ const ProductDetails = () => {
             )}
             {data &&
               data.getProductStatistics.map((p: ProductStatistics) => {
-                // dates.push(new Date(p.changed_on).getDate());
                 quantity.push(p.current_quantity);
               })}
-            <StatistsGraph dates={dates} quantity={quantity} />
+            <StatistsGraph quantity={quantity} />
           </Box>
           <Box
             sx={{
