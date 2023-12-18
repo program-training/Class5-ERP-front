@@ -1,21 +1,19 @@
-/// <reference types="vitest" />
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-
-export default defineConfig({
-  plugins: [react()],
-  test: {
-    globals: true,
-    environment: "jsdom",
-    setupFiles: "./src/tests/setup.ts",
-  },
-  server: {
-    watch: {
-      usePolling: true,
+export default defineConfig(({ mode }) => {
+  return {
+    plugins: [react()],
+    base: "erp",
+    server: {
+      watch: {
+        usePolling: true,
+      },
+      host: true,
+      strictPort: true,
+      port: 6000,
     },
-    host: true, // needed for the Docker Container port mapping to work
-    strictPort: true,
-    port: 5173, // you can replace this port with any port
-  },
-  base: '/erp'
+    build: {
+      chunkSizeWarningLimit: 2000, // Set the desired limit in kilobytes
+    },
+  };
 });

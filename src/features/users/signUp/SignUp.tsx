@@ -13,7 +13,7 @@ import { SignUpInputs } from "./components/Validitions";
 import BottomLinks from "./components/BottomLinks";
 import SubButton from "./components/SubButton";
 import TopPage from "./components/TopPage";
-import useSignUp from "./service/useSignUp";
+import signUpReq from "./service/signUpReq";
 import { To, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../redux/hooks";
 import { setAlert } from "../../inventory/alert/utils/alertSlices";
@@ -29,7 +29,6 @@ const SignUp = () => {
   const navigate = useNavigate();
   const navigateTo = (to: To) => navigate(to);
   const dispatch = useAppDispatch();
-  const signUpReq = useSignUp()
   const onSubmit = (data: SignUpInputs) => {
     const { password, email } = data;
     const userToSend = { email, password };

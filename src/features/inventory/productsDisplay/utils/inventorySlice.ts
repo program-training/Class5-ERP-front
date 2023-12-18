@@ -28,7 +28,7 @@ export const inventorySlice = createSlice({
   name: "inventory",
   initialState,
   reducers: {
-    setAllProducts: (state, action: PayloadAction<adminProductInterface[]>) => {      
+    setAllProducts: (state, action: PayloadAction<adminProductInterface[]>) => {
       state.inventoryProducts.allProducts = action.payload;
       return state;
     },
