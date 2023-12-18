@@ -11,7 +11,7 @@ const useSubmitFromDeleteProduct = () => {
     deleteProduct({
       variables: {
         input: {
-          id
+          id: `${id}`
         }
       }
     })

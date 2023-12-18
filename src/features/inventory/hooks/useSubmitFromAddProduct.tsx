@@ -19,8 +19,8 @@ const useSubmitFromAddProduct = () => {
         }
       }
     })
-      .then((res) => {        
-        actionOnRedux("add", newProduct);//update this
+      .then((res) => {                
+        actionOnRedux("add", res.data.addProduct);
         dispatch(
           setAlert({
             open: true,
