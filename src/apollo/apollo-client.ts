@@ -12,7 +12,7 @@ import { getMainDefinition } from "@apollo/client/utilities";
 const BASE_URI = import.meta.env.VITE_BASE_URL || "http://192.168.66.99:4000";
 
 const httpLink = createHttpLink({
-  uri: BASE_URI,
+  uri: `http://${BASE_URI}`,
 });
 
 const wsLink = new GraphQLWsLink(
