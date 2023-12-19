@@ -6,15 +6,8 @@ import AppBarModel from "../models/AppBar";
 import Details from "../models/Details";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { setOpenPageProducts } from "../../productsDisplay/utils/inventorySlice";
-import { useQuery } from "@apollo/client";
-import { GET_CHANGE } from "../../../../apollo/queries-temporary-location/get-change-on-product ID";
 import StatistsGraph from "./StatistsGraph";
-import MessagePendingOrError from "../../productsDisplay/components/MessagePendingOrError";
 
-interface ProductStatistics {
-  current_quantity: number;
-  changed_on: string;
-}
 const ProductDetails = () => {
   const dispatch = useAppDispatch();
   const { chosenProduct } = useAppSelector(
@@ -24,16 +17,11 @@ const ProductDetails = () => {
     (store) => store.inventory.inventoryProducts
   );
 
-  const { data, loading, error, refetch } = useQuery(GET_CHANGE, {
-    variables: { getProductStatisticsId: `${chosenProduct?.id}` || "1" },
-  });
 
   useEffect(() => {
     refetch();
   }, [chosenProduct]);
 
-  const [openUpdate, setOpenUpdate] = useState(false);
-  const quantity: number[] = [];
 
   if (!chosenProduct) return;
 
@@ -53,17 +41,8 @@ const ProductDetails = () => {
         <Box sx={{ display: "flex", margin: 1, maxWidth: "100%" }}>
           <Box>
             <Details product={chosenProduct} />
-            {loading && (
-              <MessagePendingOrError message={"load"} title={"load products"} />
-            )}
-            {!data && error && (
-              <MessagePendingOrError message={error.message} title={"error"} />
-            )}
-            {data &&
-              data.getProductStatistics.map((p: ProductStatistics) => {
-                quantity.push(p.current_quantity);
-              })}
-            <StatistsGraph quantity={quantity} />
+            <StatistsGraph productId={chosenProduct.id} />
+
           </Box>
           <Box
             sx={{
