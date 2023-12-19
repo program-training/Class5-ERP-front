@@ -1,12 +1,12 @@
 import Dialog from "@mui/material/Dialog";
 import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
 import FormAddAndUpdate from "../../form/components/FormAddAndUpdate";
 import AppBarModel from "../models/AppBar";
 import Details from "../models/Details";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { setOpenPageProducts } from "../../productsDisplay/utils/inventorySlice";
 import StatistsGraph from "./StatistsGraph";
+import { useState } from "react";
 
 const ProductDetails = () => {
   const dispatch = useAppDispatch();
@@ -16,12 +16,7 @@ const ProductDetails = () => {
   const { openProductPage } = useAppSelector(
     (store) => store.inventory.inventoryProducts
   );
-
-
-  useEffect(() => {
-    refetch();
-  }, [chosenProduct]);
-
+  const [openUpdate, setOpenUpdate] = useState(false);
 
   if (!chosenProduct) return;
 
@@ -42,7 +37,6 @@ const ProductDetails = () => {
           <Box>
             <Details product={chosenProduct} />
             <StatistsGraph productId={chosenProduct.id} />
-
           </Box>
           <Box
             sx={{
