@@ -1,9 +1,9 @@
-import { useQuery } from "@apollo/client";
+import { useQuery, useSubscription } from "@apollo/client";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { GET_CHANGE } from "../../../../apollo/queries-temporary-location/get-change-on-product ID";
 import MessagePendingOrError from "../../productsDisplay/components/MessagePendingOrError";
 import { useEffect } from "react";
-import { statisticChanged } from "../../../../apollo/queries-temporary-location/get-statistics-subscription";
+import { STATISTICS_SUBSCRIPTION } from "../../../../apollo/queries-temporary-location/get-statistics-subscription";
 
 interface ProductStatistics {
   current_quantity: number;
@@ -21,9 +21,14 @@ const StatistsGraph = ({ productId }: Props) => {
     variables: { getProductStatisticsId: `${productId}` || '11111111' },
   });
 
+  const {data: dataTest } = useSubscription(STATISTICS_SUBSCRIPTION, {variables: { productId }});
+
+  console.log('dataTest:', dataTest);
+  
+  
   useEffect(() => subscribeToMore({
-    document: statisticChanged,
-    variables: { productId },
+    document: STATISTICS_SUBSCRIPTION,
+    variables: { productId: `${productId}` },
     updateQuery: (prev, { subscriptionData }) => {
       console.log('data. prev:', prev, 'new:', subscriptionData);
       
@@ -35,7 +40,7 @@ const StatistsGraph = ({ productId }: Props) => {
           comments: [newChange, ...prev.post.comments]
         }
       })
-    }}), [])
+    }}), [productId])
   
   return (<>
     {loading && (

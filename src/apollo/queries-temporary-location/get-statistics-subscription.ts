@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const statisticChanged = gql`
-  subscription statisticChanged($productId: ID!) {
-    commentAdded(productId: $productId) {
+export const STATISTICS_SUBSCRIPTION = gql`
+  subscription statisticChanged($productId: String!) {
+    statisticChanged(productId: $productId) {
         product_id
         changed_on
         current_quantity
