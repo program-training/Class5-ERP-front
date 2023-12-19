@@ -9,21 +9,19 @@ import normalizeData from "../form/normalize-data";
 const useSubmitFromUpdateProduct = () => {
   const dispatch = useAppDispatch();
   const actionOnRedux = useActionOnRedux();
-  const [ updateProduct ] = useMutation(MUTATION_UPDATE_PRODUCT)
+  const [updateProduct] = useMutation(MUTATION_UPDATE_PRODUCT);
   return (newProduct: adminProductInterface, id: string | number) => {
-    
     updateProduct({
       variables: {
         input: {
-          product: {...normalizeData(newProduct)},
-          id: `${id}`
+          product: { ...normalizeData(newProduct) },
+          id: `${id}`,
         },
-      }
+      },
     })
       .then(() => {
         // dispatch(setChosenProduct({ ...newProduct, id: +id }))
-        console.log('new product:', newProduct);
-        
+
         actionOnRedux("update", { ...newProduct, id: +id });
         dispatch(
           setAlert({

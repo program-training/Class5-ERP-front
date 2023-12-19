@@ -33,9 +33,10 @@ const StatistsGraph = ({ productId }: Props) => {
       })}
     <LineChart
       // xAxis={[{ data: dates }]} // תאריך
+
       series={[
         {
-          data: quantity, // כמות
+          data: quantity,
           area: true,
         },
       ]}

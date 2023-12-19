@@ -1,6 +1,6 @@
 import Dialog from "@mui/material/Dialog";
 import { Box } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormAddAndUpdate from "../../form/components/FormAddAndUpdate";
 import AppBarModel from "../models/AppBar";
 import Details from "../models/Details";
@@ -17,7 +17,11 @@ const ProductDetails = () => {
     (store) => store.inventory.inventoryProducts
   );
 
-  const [openUpdate, setOpenUpdate] = useState(false);
+
+  useEffect(() => {
+    refetch();
+  }, [chosenProduct]);
+
 
   if (!chosenProduct) return;
 
@@ -38,6 +42,7 @@ const ProductDetails = () => {
           <Box>
             <Details product={chosenProduct} />
             <StatistsGraph productId={chosenProduct.id} />
+
           </Box>
           <Box
             sx={{

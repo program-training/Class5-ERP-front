@@ -20,24 +20,23 @@ const useActionOnRedux = () => {
     const builder = [...allProducts];
     action === "add" && newProduct && builder.push(newProduct);
     // add the new product to the user's products list in redux
-    
-    if (action === 'add' && newProduct) {
 
-      dispatch(setUserProducts([...userProducts, newProduct]))
+    if (action === "add" && newProduct) {
+      dispatch(setUserProducts([...userProducts, newProduct]));
     }
     action === "delete" &&
       builder.splice(
-        builder.findIndex((product) => `${product.id}` === `${chosenProduct?.id}`),
+        builder.findIndex(
+          (product) => `${product.id}` === `${chosenProduct?.id}`
+        ),
         1
       );
     if (action === "update" && newProduct) {
-      console.log('old builder', builder);
       builder[
         builder.findIndex((product) => product.id === chosenProduct?.id)
       ] = newProduct;
-      console.log('updated builder', builder);
     }
-    
+
     newProduct && dispatch(setChosenProduct(newProduct));
     builder && dispatch(setAllProducts(builder));
     builder && dispatch(setFilteredProducts(builder));
