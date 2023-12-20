@@ -1,4 +1,4 @@
-import { useQuery, useSubscription } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { GET_CHANGE } from "../../../../apollo/queries-temporary-location/get-change-on-product ID";
 import MessagePendingOrError from "../../productsDisplay/components/MessagePendingOrError";
@@ -14,32 +14,31 @@ interface Props {
   productId: string | number
 }
 const StatistsGraph = ({ productId }: Props) => {
-  const dates: number[] = [];
-  const quantity: number[] = [];
 
   const { data, loading, error, subscribeToMore } = useQuery(GET_CHANGE, {
     variables: { getProductStatisticsId: `${productId}` || '11111111' },
   });
 
-  const {data: dataTest } = useSubscription(STATISTICS_SUBSCRIPTION, {variables: { productId }});
+  // const dates = data ? data.getProductStatistics.map((p: ProductStatistics) => {
+  //   return new Date(p.changed_on).getDate();
+  // }) : []
 
-  console.log('dataTest:', dataTest);
-  
+  const quantity = data ? data.getProductStatistics.map((p: ProductStatistics) => {
+    return p.current_quantity;
+  }) : []
+
+  console.log('data from query', data);
   
   useEffect(() => subscribeToMore({
     document: STATISTICS_SUBSCRIPTION,
     variables: { productId: `${productId}` },
     updateQuery: (prev, { subscriptionData }) => {
-      console.log('data. prev:', prev, 'new:', subscriptionData);
+      console.log('prev', prev, 'subscriptionData', subscriptionData);
       
-      if (!subscriptionData.data) return prev;
-      const newChange = subscriptionData.data.commentAdded;
+      if (!subscriptionData.data) return prev
+      
+      return { getProductStatistics: subscriptionData.data.statisticChanged }
 
-      return Object.assign({}, prev, {
-        post: {
-          comments: [newChange, ...prev.post.comments]
-        }
-      })
     }}), [productId])
   
   return (<>
@@ -49,11 +48,6 @@ const StatistsGraph = ({ productId }: Props) => {
     {!data && error && (
       <MessagePendingOrError message={error.message} title={"error"} />
     )}
-    {data &&
-      data.getProductStatistics.map((p: ProductStatistics) => {
-        dates.push(new Date(p.changed_on).getDate());
-        quantity.push(p.current_quantity);
-      })}
     <LineChart
       // xAxis={[{ data: dates }]} // תאריך
 
