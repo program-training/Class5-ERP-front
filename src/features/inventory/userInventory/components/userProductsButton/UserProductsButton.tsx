@@ -21,9 +21,7 @@ const UserProductsButton = () => {
   }, [data]);
 
   const handelClick = () => {
-    refetch()
-      .then(() => dispatch(setUserProducts(data.getMyProducts)))
-      .then(() => console.log(data));
+    refetch().then(() => dispatch(setUserProducts(data.getMyProducts)));
 
     if (userProducts.length > 0) dispatch(setOpenUserProducts(true));
     if (userProducts.length === 0) {

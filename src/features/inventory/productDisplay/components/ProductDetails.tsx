@@ -1,20 +1,13 @@
 import Dialog from "@mui/material/Dialog";
 import { Box } from "@mui/material";
-import { useState } from "react";
 import FormAddAndUpdate from "../../form/components/FormAddAndUpdate";
 import AppBarModel from "../models/AppBar";
 import Details from "../models/Details";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { setOpenPageProducts } from "../../productsDisplay/utils/inventorySlice";
-import { useQuery } from "@apollo/client";
-import { GET_CHANGE } from "../../../../apollo/queries-temporary-location/get-change-on-product ID";
 import StatistsGraph from "./StatistsGraph";
-import MessagePendingOrError from "../../productsDisplay/components/MessagePendingOrError";
+import { useState } from "react";
 
-interface ProductStatistics {
-  current_quantity: number;
-  changed_on: string;
-}
 const ProductDetails = () => {
   const dispatch = useAppDispatch();
   const { chosenProduct } = useAppSelector(
@@ -23,16 +16,7 @@ const ProductDetails = () => {
   const { openProductPage } = useAppSelector(
     (store) => store.inventory.inventoryProducts
   );
-
-  const { data, loading, error } = useQuery(GET_CHANGE, {
-    variables: { getProductStatisticsId: `${chosenProduct?.id}` || "11111111" },
-  });
-
   const [openUpdate, setOpenUpdate] = useState(false);
-
-  const dates: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-  // const dates: number[] = [];
-  const quantity: number[] = [];
 
   if (!chosenProduct) return;
 
@@ -52,18 +36,7 @@ const ProductDetails = () => {
         <Box sx={{ display: "flex", margin: 1, maxWidth: "100%" }}>
           <Box>
             <Details product={chosenProduct} />
-            {loading && (
-              <MessagePendingOrError message={"load"} title={"load products"} />
-            )}
-            {!data && error && (
-              <MessagePendingOrError message={error.message} title={"error"} />
-            )}
-            {data &&
-              data.getProductStatistics.map((p: ProductStatistics) => {
-                // dates.push(new Date(p.changed_on).getDate());
-                quantity.push(p.current_quantity);
-              })}
-            <StatistsGraph dates={dates} quantity={quantity} />
+            <StatistsGraph productId={chosenProduct.id} />
           </Box>
           <Box
             sx={{
