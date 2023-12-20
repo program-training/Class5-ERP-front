@@ -11,55 +11,59 @@ interface ProductStatistics {
 }
 
 interface Props {
-  productId: string | number
+  productId: string | number;
 }
 const StatistsGraph = ({ productId }: Props) => {
-
   const { data, loading, error, subscribeToMore } = useQuery(GET_CHANGE, {
-    variables: { getProductStatisticsId: `${productId}` || '11111111' },
+    variables: { getProductStatisticsId: `${productId}` || "11111111" },
   });
 
   // const dates = data ? data.getProductStatistics.map((p: ProductStatistics) => {
   //   return new Date(p.changed_on).getDate();
   // }) : []
 
-  const quantity = data ? data.getProductStatistics.map((p: ProductStatistics) => {
-    return p.current_quantity;
-  }) : []
+  const quantity = data
+    ? data.getProductStatistics.map((p: ProductStatistics) => {
+        return p.current_quantity;
+      })
+    : [];
 
-  console.log('data from query', data);
-  
-  useEffect(() => subscribeToMore({
-    document: STATISTICS_SUBSCRIPTION,
-    variables: { productId: `${productId}` },
-    updateQuery: (prev, { subscriptionData }) => {
-      console.log('prev', prev, 'subscriptionData', subscriptionData);
-      
-      if (!subscriptionData.data) return prev
-      
-      return { getProductStatistics: subscriptionData.data.statisticChanged }
+  useEffect(
+    () =>
+      subscribeToMore({
+        document: STATISTICS_SUBSCRIPTION,
+        variables: { productId: `${productId}` },
+        updateQuery: (prev, { subscriptionData }) => {
+          if (!subscriptionData.data) return prev;
 
-    }}), [productId])
-  
-  return (<>
-    {loading && (
-      <MessagePendingOrError message={"load"} title={"load products"} />
-    )}
-    {!data && error && (
-      <MessagePendingOrError message={error.message} title={"error"} />
-    )}
-    <LineChart
-      // xAxis={[{ data: dates }]} // תאריך
-
-      series={[
-        {
-          data: quantity,
-          area: true,
+          return {
+            getProductStatistics: subscriptionData.data.statisticChanged,
+          };
         },
-      ]}
-      width={500}
-      height={300}
-    />
+      }),
+    [productId]
+  );
+
+  return (
+    <>
+      {loading && (
+        <MessagePendingOrError message={"load"} title={"load products"} />
+      )}
+      {!data && error && (
+        <MessagePendingOrError message={error.message} title={"error"} />
+      )}
+      <LineChart
+        // xAxis={[{ data: dates }]} // תאריך
+
+        series={[
+          {
+            data: quantity,
+            area: true,
+          },
+        ]}
+        width={500}
+        height={300}
+      />
     </>
   );
 };
